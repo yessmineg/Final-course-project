@@ -1,0 +1,24 @@
+<template>
+    <lightning-card>
+        <div class="slds-p-around_medium">
+            <!-- Titre avec style personnalisé -->
+            <div style="font-family: Arial, sans-serif; line-height: 1.6; background-color: #ffff; padding: 20px;">
+                <h2 style="color: #10273b; font-size: 2rem; font-weight: bold; margin-bottom: 30px;">
+                    <lightning-icon icon-name="standard:service_appointment" size="small" style="vertical-align: middle; margin-right: 10px;"></lightning-icon>
+                    Nos Services d'Assurances de Vie
+                </h2>
+            </div>
+
+            <ul class="slds-list_dotted">
+                <template for:each={services} for:item="service">
+                    <li key={service.id} class="slds-item">
+                        <div class="service-item" onmouseover={handleMouseOver} onmouseout={handleMouseOut}>
+                            <h3 class="service-title">{service.name}</h3>
+                            <p class="service-description">{service.description}</p>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </lightning-card>
+</template>

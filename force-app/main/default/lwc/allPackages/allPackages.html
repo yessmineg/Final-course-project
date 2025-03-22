@@ -1,0 +1,50 @@
+<template>
+    <div class="packages-container slds-grid slds-wrap">
+        <template if:true={packages}>
+            <template for:each={packages} for:item="pkg">
+                <div class="slds-col slds-size_1-of-2 slds-p-around_small" key={pkg.productCode}>
+                    <div class="package-card">
+                        <lightning-card title={pkg.productName} icon-name="utility:insurance" class="slds-card">
+                            <div class="card-content">
+                                <!-- Basic information -->
+                                <div class="basic-info">
+                                    <p><strong>Code:</strong> {pkg.productCode}</p>
+                                    <p><strong>Status:</strong>
+                                        <!-- Dynamically assign the class for the status text -->
+                                        <span class={pkg.statusClass}>{pkg.status}</span>
+                                    </p>
+                                    <p><strong>Annual Premium:</strong> {pkg.annualPremium}</p>
+                                    <p><strong>Coverage Limit:</strong> {pkg.coverageLimit}</p>
+                                    <p><strong>Deductible:</strong> {pkg.deductible}</p>
+                                    <p><strong>Reimbursement Rate:</strong> {pkg.reimbursementRate}</p>
+                                    <p><strong>Contract Duration:</strong> {pkg.contractDuration}</p>
+                                </div>
+                                
+                                <!-- Expandable Details (Accordion) -->
+                                <div class="accordion">
+                                    <lightning-button variant="neutral" label="More Details" onclick={toggleAccordion} data-id={pkg.productCode}></lightning-button>
+                                    <template if:true={pkg.showDetails}>
+                                        <div class="additional-info">
+                                            <p><strong>Description:</strong> {pkg.description}</p>
+                                            <p><strong>Category:</strong> {pkg.category}</p>
+                                            <p><strong>Exclusions:</strong> {pkg.exclusions}</p>
+                                            <p><strong>Additional Benefits:</strong> {pkg.additionalBenefits}</p>
+                                            <p><strong>Min Age:</strong> {pkg.minimumAge}</p>
+                                            <p><strong>Max Age:</strong> {pkg.maximumAge}</p>
+                                            <p><strong>Discounts:</strong> {pkg.discounts}</p>
+                                            <p><strong>Renewal Conditions:</strong> {pkg.renewalConditions}</p>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </lightning-card>
+                    </div>
+                </div>
+            </template>
+        </template>
+        
+        <template if:false={packages}>
+            <p>Loading...</p>
+        </template>
+    </div>
+</template>

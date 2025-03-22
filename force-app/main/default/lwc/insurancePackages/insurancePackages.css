@@ -1,0 +1,188 @@
+/* Conteneur des cartes */
+.packages-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-content: center; /* Centre les éléments horizontalement */
+    align-items: start;   /* Aligne les éléments en haut */
+    max-width: 1200px;     /* Empêche l'extension excessive des éléments sur de très grands écrans */
+    margin: 0 auto;        /* Centre le conteneur sur l'écran */
+}
+
+/* Carte de chaque produit */
+.package-card {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background-color: #fff;
+    margin-top: 20px;
+}
+
+/* Effet d'hover pour la carte */
+.package-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Ombrage plus marqué au survol */
+}
+
+/* Contenu de la carte */
+.card-content {
+    padding: 15px;
+    font-size: 14px;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Amélioration de l'affichage du nom du produit */
+.package-card .slds-card__header {
+    font-size: 24px;
+    font-weight: bold;
+    color: #3498db; /* Couleur bleue dynamique */
+    text-align: center;  /* Centrer le titre */
+    padding: 10px;
+    background-color: #ecf0f1;  /* Fond léger pour la section titre */
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Information de base */
+.basic-info p {
+    margin: 5px 0;
+    font-size: 16px; /* Taille de police augmentée */
+    color: #333;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Infos supplémentaires */
+.additional-info p {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #555;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Style des titres des sous-sections */
+.package-card .basic-info p,
+.package-card .additional-info p {
+    font-weight: 500;
+}
+
+/* Style des informations supplémentaires */
+.basic-info p,
+.additional-info p {
+    line-height: 1.6;
+}
+
+/* Design de l'accordéon ou des infos supplémentaires */
+.card-content div {
+    margin-bottom: 15px;
+}
+
+/* Amélioration des couleurs et de l'alignement */
+.slds-card__body {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Séparer les éléments */
+.additional-info p {
+    padding-left: 10px;
+}
+
+/* Styles de bas de page, si nécessaire */
+.slds-card__footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f8f8f8;
+}
+
+/* Définition responsive */
+@media (max-width: 768px) {
+    .packages-container {
+        grid-template-columns: 1fr; /* Empiler les cartes sur petits écrans */
+        gap: 15px;
+    }
+
+    .package-card {
+        max-width: 100%;
+    }
+}
+
+/* Mise à jour de la police et des couleurs pour les détails */
+.card-content .additional-info p {
+    color: #2c3e50; /* Couleur plus sombre pour les détails */
+    font-size: 15px;
+}
+
+/* Dynamique sur hover des titres */
+.package-card:hover .slds-card__header {
+    color: #2980b9; /* Changer la couleur du titre lors du survol */
+    background-color: #f1f1f1; /* Fond plus clair au survol */
+}
+
+/* Conteneur du bouton */
+.view-all-container {
+    display: flex;
+    justify-content: center; /* Centre le bouton */
+    margin-top: 20px;
+}
+
+/* Style du bouton View All */
+.view-all-button {
+    font-size: 18px; /* Augmenter la taille du texte */
+    padding: 12px 24px; /* Ajouter du padding pour agrandir le bouton */
+    background-color: #325166; /* Couleur de fond personnalisée */
+    color: #fff; /* Texte en blanc */
+    border: none;
+    border-radius: 8px; /* Coins arrondis */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ajout d'ombre */
+}
+
+.view-all-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.view-all-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Focus sur le bouton */
+.view-all-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(50, 81, 102, 0.5); /* Ombre au focus pour meilleure visibilité */
+}
+
+/* Effet d'hover pour la carte */
+.package-card {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    background-color: #fff;
+    margin-top: 20px;
+    border: 2px solid #ddd; /* Ajouter une bordure légère pour la carte */
+}
+
+/* Appliquer un changement de couleur au survol de la carte */
+.package-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Ombrage plus marqué au survol */
+    background-color: #f0f8ff; /* Couleur de fond claire au survol */
+    border-color: #2980b9; /* Change la couleur de bordure au survol */
+}
+
+/* Dynamique sur hover des titres */
+.package-card:hover .slds-card__header {
+    color: #ffffff; /* Change la couleur du texte du titre au survol */
+    background-color: #2980b9; /* Change la couleur de fond du titre au survol */
+}

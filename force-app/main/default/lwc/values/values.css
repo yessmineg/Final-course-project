@@ -1,0 +1,54 @@
+.circle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.circle-row {
+    display: flex;
+    justify-content: center;
+    gap: 50px; /* Augmenter l'espacement entre les cercles */
+}
+
+.circle {
+    text-align: center;
+    background-color: #f4f6f9; /* Couleur de fond initiale */
+    border-radius: 50%;
+    padding: 40px; /* Augmenter le padding pour rendre le cercle encore plus grand */
+    width: 180px; /* Augmenter la largeur du cercle */
+    height: 180px; /* Augmenter la hauteur du cercle */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Augmenter l'ombre pour plus de profondeur */
+    transition: background-color 0.3s, transform 0.3s; /* Ajouter une transition pour la couleur et la transformation */
+}
+
+.circle:hover {
+    background-color: #0070d2; /* Couleur du cercle au survol */
+    transform: scale(1.1); /* Augmenter légèrement la taille du cercle au survol */
+}
+
+.circle-icon {
+    margin-bottom: 15px; /* Augmenter l'espacement entre l'icône et le texte */
+    font-size: 50px; /* Augmenter la taille de l'icône */
+    color: #333; /* Couleur de l'icône par défaut */
+    transition: color 0.3s; /* Transition de la couleur de l'icône */
+}
+
+.circle:hover .circle-icon {
+    color: white; /* Changer la couleur de l'icône au survol */
+}
+
+.circle-value {
+    font-size: 18px; /* Augmenter la taille du texte */
+    font-weight: 600;
+    color: #333;
+    transition: color 0.3s; /* Transition de la couleur du texte */
+}
+
+.circle:hover .circle-value {
+    color: white; /* Changer la couleur du texte au survol */
+}

@@ -1,0 +1,34 @@
+<template>
+    <lightning-card class="testimonial-card">
+        <div class="testimonial-card-header">
+            <div class="testimonial-header-content">
+                <lightning-icon icon-name="utility:quote" size="small" class="testimonial-icon"></lightning-icon>
+                <h2 class="testimonial-title">Customer Testimonials</h2>
+            </div>
+            <p class="testimonial-subtitle">See what our satisfied customers have to say about us!</p>
+        </div>
+
+        <template if:true={testimonials}>
+            <div class="testimonial-container">
+                <template for:each={testimonials} for:item="testimonial">
+                    <div key={testimonial.id} class="testimonial">
+                        <div class="testimonial-header">
+                            <img src={testimonial.avatar} alt="User Avatar" class="testimonial-avatar" />
+                            <div>
+                                <strong>{testimonial.author}</strong>
+                                <em>({testimonial.date})</em>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            "{testimonial.content}"
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <template if:false={testimonials}>
+            <p class="no-testimonials">No testimonials available.</p>
+        </template>
+    </lightning-card>
+</template>

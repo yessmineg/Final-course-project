@@ -1,0 +1,53 @@
+.slds-card {
+    background-color: #f3f6f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.slds-list_dotted {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.slds-item {
+    margin-bottom: 2rem;
+}
+
+.service-item {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.service-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.service-title {
+    font-size: 1.5rem;
+    color: #325166;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.service-description {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.5;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.service-item:hover .service-description {
+    opacity: 0.8;
+}
+
+.slds-text-heading_medium {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
+
