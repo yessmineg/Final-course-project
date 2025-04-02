@@ -1,0 +1,70 @@
+/* Container for the blog section */
+.blog-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Card style for each blog item */
+.blog-card {
+    background: #fff; /* White background */
+    padding: 20px;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Hover effect for blog cards */
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Title of the blog */
+.blog-card h3 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #325166; /* Dark blue for the title */
+    margin-bottom: 10px;
+}
+
+/* Date of the blog */
+.blog-card p.date {
+    font-size: 14px;
+    color: #99cade; /* Lighter blue for the date */
+    margin-bottom: 12px;
+}
+
+/* Summary of the blog */
+.blog-card p.summary {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Button for "Read More" */
+.blog-card button {
+    background-color: #325166; /* Dark blue background */
+    color: white; /* White text */
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect for the button */
+.blog-card button:hover {
+    background-color: #99cade; /* Light blue on hover */
+    transform: scale(1.05);
+}
+
+/* Message when no articles are available */
+.no-articles {
+    text-align: center;
+    font-size: 18px;
+    color: #99cade; /* Light blue text */
+    font-weight: bold;
+}

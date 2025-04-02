@@ -1,7 +1,7 @@
 /* Conteneur des cartes */
 .packages-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 cartes par ligne */
+    grid-template-columns: repeat(2, minmax(500px, 1fr));
     gap: 20px;
     padding: 20px;
     justify-items: center; /* Centre les éléments horizontalement */
@@ -12,7 +12,7 @@
 /* Carte de chaque produit */
 .package-card {
     width: 100%;
-    max-width: 400px; /* Augmenter la largeur maximale des cartes */
+    max-width: 350px; /* Augmenter la largeur maximale des cartes */
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -24,7 +24,6 @@
 .package-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Ombrage plus marqué au survol */
-    background-color: #f0f8ff; /* Couleur de fond claire au survol */
     border-color: #325166; /* Change la couleur de bordure au survol */
 }
 
@@ -41,7 +40,7 @@
 
 /* Amélioration de l'affichage du nom du produit */
 .package-card .slds-card__header {
-    font-size: 26px; /* Augmenter la taille de la police du titre */
+    font-size: 24px; /* Augmenter la taille de la police du titre */
     font-weight: bold;
     color: #ffffff; /* Couleur bleue dynamique */
     text-align: left;  /* Alignement du titre à gauche */
@@ -189,5 +188,16 @@
 .status-default {
     color: black; /* Default black color for other statuses */
     font-weight: bold;
+}
+input, lightning-input {
+    pointer-events: auto !important;  /* Ensure the inputs are clickable */
+    z-index: 10;  /* Ensure the inputs are above any other content */
+}
+input, lightning-input {
+    width: 100%;  /* Ensure the input takes the full width */
+    padding: 10px; /* Add some padding for better interaction */
+}
+.packages-container, .package-card, .card-content {
+    overflow: visible !important; /* Ensure content isn't hidden */
 }
 

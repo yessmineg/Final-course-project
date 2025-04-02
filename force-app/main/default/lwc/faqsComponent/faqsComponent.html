@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="FAQs" icon-name="utility:question_and_answer">
+        <template if:true={faqs}>
+            <div class="faq-container">
+                <template for:each={faqs} for:item="faq">
+                    <div key={faq.id} class="faq-item">
+                        <h3 onclick={toggleAnswer} data-id={faq.id} class="faq-question">
+                            {faq.question}
+                        </h3>
+                        <template if:true={faq.isExpanded}>
+                            <p class="faq-answer">{faq.answer}</p>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template if:false={faqs}>
+            <p class="no-faqs">No FAQs available.</p>
+        </template>
+    </lightning-card>
+</template>

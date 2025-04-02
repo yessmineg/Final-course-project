@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Blog & News" icon-name="utility:news">
+        <template if:true={articles}>
+            <div class="blog-container">
+                <template for:each={articles} for:item="article">
+                    <div key={article.id} class="blog-card">
+                        <h3>{article.title}</h3>
+                        <p>{article.date}</p>
+                        <p>{article.summary}</p>
+                        <button data-id={article.id} onclick={handleReadMore}>Read More</button>
+                    </div>
+                </template>
+                
+            </div>
+        </template>
+        <template if:false={articles}>
+            <p class="no-articles">No articles available.</p>
+        </template>
+    </lightning-card>
+</template>

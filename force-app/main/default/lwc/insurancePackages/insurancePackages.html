@@ -12,6 +12,7 @@
                             <p><strong>Deductible:</strong> {pkg.deductible}</p>
                             <p><strong>Reimbursement Rate:</strong> {pkg.reimbursementRate}</p>
                             <p><strong>Contract Duration:</strong> {pkg.contractDuration}</p>
+                            <p><strong>Type of insurance:</strong> {pkg.type}</p>
                         </div>
                         
                         <!-- Expandable Details (Accordion) -->
@@ -34,9 +35,12 @@
                 </lightning-card>
             </template>
         </template>
-        
+
         <template if:false={packages}>
             <p>Loading...</p>
         </template>
+
+        <!-- Redirect Button with Custom CSS -->
+        <button class="blog-card-button" onclick={navigateToProducts}>Click here to see all products</button>
     </div>
 </template>
