@@ -1,203 +1,249 @@
-/* Conteneur des cartes */
-.packages-container {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(500px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    justify-items: center; /* Centre les éléments horizontalement */
-    align-items: start;   /* Aligne les éléments en haut */
-    max-width: 1200px;     /* Empêche l'extension excessive des éléments sur de très grands écrans */
-    margin: 0 auto;        /* Centre le conteneur sur l'écran */
-}
-/* Carte de chaque produit */
-.package-card {
-    width: 100%;
-    max-width: 350px; /* Augmenter la largeur maximale des cartes */
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    background-color: #99cade;
-    margin-top: 20px;
+/* ===========================
+   General Modal Styles
+   =========================== */
+   .slds-backdrop {
+    background-color: rgba(0, 0, 0, 0.6); /* Légèrement plus foncé pour plus de contraste */
 }
 
-/* Effet d'hover pour la carte */
-.package-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Ombrage plus marqué au survol */
-    border-color: #325166; /* Change la couleur de bordure au survol */
+/* Modal Container */
+.slds-modal__container {
+    max-width: 40rem;  /* Augmenter la taille pour plus d'espace */
+    padding: 2rem;
+    border-radius: 10px;  /* Coins plus arrondis pour un effet moderne */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Contenu de la carte */
-.card-content {
-    padding: 15px;
-    font-size: 14px;
-    background-color: #ffffff;
-    border-radius: 10px;
+/* Modal Header */
+.slds-modal__header {
+    background-color: #2b4d6c;
+    color: white;
+    font-size: 1.5rem; /* Augmenter la taille de la police */
+    padding: 1.5rem;
+    border-bottom: 1px solid #ddd;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-}
-
-/* Amélioration de l'affichage du nom du produit */
-.package-card .slds-card__header {
-    font-size: 24px; /* Augmenter la taille de la police du titre */
-    font-weight: bold;
-    color: #ffffff; /* Couleur bleue dynamique */
-    text-align: left;  /* Alignement du titre à gauche */
-    padding: 10px;
-    background-color: #ffffff;  /* Fond léger pour la section titre */
+    align-items: center;
     border-radius: 10px 10px 0 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-
-/* Information de base */
-.basic-info p {
-    margin: 5px 0;
-    font-size: 16px; /* Taille de police augmentée */
-    color: #333;
-    font-family: 'Arial', sans-serif;
-}
-
-/* Infos supplémentaires */
-.additional-info p {
-    margin: 10px 0;
-    font-size: 14px;
-    color: #555;
-    font-family: 'Arial', sans-serif;
-}
-
-/* Style des titres des sous-sections */
-.package-card .basic-info p,
-.package-card .additional-info p {
-    font-weight: 500;
-}
-
-/* Style des informations supplémentaires */
-.basic-info p,
-.additional-info p {
-    line-height: 1.6;
-}
-
-/* Design de l'accordéon ou des infos supplémentaires */
-.card-content div {
-    margin-bottom: 15px;
-}
-
-/* Amélioration des couleurs et de l'alignement */
-.slds-card__body {
-    font-family: 'Arial', sans-serif;
-    font-size: 14px;
-    color: #333;
-}
-
-/* Séparer les éléments */
-.additional-info p {
-    padding-left: 10px;
-}
-
-/* Styles de bas de page, si nécessaire */
-.slds-card__footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #99cade;
-}
-
-/* Définition responsive */
-@media (max-width: 768px) {
-    .packages-container {
-        grid-template-columns: 1fr; /* Empiler les cartes sur petits écrans */
-        gap: 15px;
-    }
-
-    .package-card {
-        max-width: 100%;
-    }
-}
-
-/* Mise à jour de la police et des couleurs pour les détails */
-.card-content .additional-info p {
-    color: #2c3e50; /* Couleur plus sombre pour les détails */
-    font-size: 15px;
-}
-
-/* Dynamique sur hover des titres */
-.package-card:hover .slds-card__header {
-    color: #325166; /* Change la couleur du texte du titre au survol */
-    background-color: #325166; /* Change la couleur de fond du titre au survol */
-}
-
-/* Conteneur du bouton */
-.view-all-container {
-    display: flex;
-    justify-content: center; /* Centre le bouton */
-    margin-top: 20px;
-}
-
-/* Style du bouton View All */
-.view-all-button {
-    font-size: 18px; /* Augmenter la taille du texte */
-    padding: 12px 24px; /* Ajouter du padding pour agrandir le bouton */
-    background-color: #f3f6f8; /* Couleur de fond personnalisée */
-    color: #325166; /* Texte en blanc */
+/* Close Button */
+.slds-modal__close {
+    color: #fff;
     border: none;
-    border-radius: 8px; /* Coins arrondis */
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ajout d'ombre */
+    background: none;
+    font-size: 1.5rem; /* Agrandir le bouton pour une meilleure visibilité */
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-.view-all-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+.slds-modal__close:hover {
+    color: #ffcccb;
 }
 
-.view-all-button:active {
-    transform: scale(0.95);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+/* Modal Content */
+.slds-modal__content {
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 0 0 10px 10px; /* Coins arrondis pour le bas */
 }
 
-/* Focus sur le bouton */
-.view-all-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(50, 81, 102, 0.5); /* Ombre au focus pour meilleure visibilité */
+/* Modal Footer */
+.slds-modal__footer {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-top: 1px solid #ddd;
+    text-align: right;
+    border-radius: 0 0 10px 10px;
 }
 
-/* Appliquer un changement de couleur au survol de la carte */
+/* ===========================
+   Package Card Styling
+   =========================== */
+.package-card {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
 .package-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Ombrage plus marqué au survol */
-    background-color: #f0f8ff; /* Couleur de fond claire au survol */
-    border-color: #99cade; /* Change la couleur de bordure au survol */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px); /* Légère élévation pour l'effet de survol */
+    background-color: #eef2f7;
 }
 
-.status-active {
-    color: green; /* Green for Active */
+/* ===========================
+   Text & Typography
+   =========================== */
+.slds-text-heading_medium {
+    font-size: 1.5rem;  /* Augmenter la taille des titres pour plus de visibilité */
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.slds-text-heading_small {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.premium {
+    color: #0070d2;
     font-weight: bold;
 }
 
-.status-inactive {
-    color: red; /* Red for Inactive */
-    font-weight: bold;
+.slds-text-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
 }
 
-.status-paused {
-    color: mustard; /* Mustard color for Paused */
-    font-weight: bold;
+/* ===========================
+   Buttons
+   =========================== */
+   .lightning-button {
+    padding: 1rem 2rem; /* Increased padding for a larger button */
+    font-size: 18px; /* Larger font size */
+    border-radius: 8px; /* Slightly larger border radius */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.status-default {
-    color: black; /* Default black color for other statuses */
+.lightning-button:hover {
+    background-color: #2b4d6c;
+    transform: scale(1.1); /* Increased scaling on hover for a larger effect */
+}
+
+.lightning-button-icon {
+    padding: 1rem 2rem; /* Increased padding for the button with icon */
+}
+
+.lightning-button:disabled {
+    background-color: #d8dde6;
+    color: #f4f6f9;
+    cursor: not-allowed;
+}
+
+
+/* ===========================
+   Input Fields
+   =========================== */
+.slds-input, .slds-textarea {
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 75, 135, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.slds-input:focus, .slds-textarea:focus {
+    border-color: #004b87;
+    box-shadow: 0 0 5px rgba(0, 75, 135, 0.5);
+}
+
+/* Label Styling */
+.lightning-input label {
+    font-weight: 600;
+    margin-bottom: 0.5rem; /* Ajout de marge sous les labels pour plus d'espace */
+}
+
+/* ===========================
+   Package Summary Section
+   =========================== */
+.package-summary {
+    background-color: #f1f5f8;
+    padding: 1.5rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+}
+
+h3.slds-text-heading_small {
+    margin-bottom: 1.5rem;  /* Ajouter de l'espace sous les titres */
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+p.slds-text-title {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+/* ===========================
+   Form Layout
+   =========================== */
+.slds-grid.slds-wrap {
+    margin-bottom: 1.5rem;
+}
+
+.slds-col.slds-size_1-of-2 {
+    padding: 0.75rem;
+}
+
+/* ===========================
+   Progress Tracker
+   =========================== */
+.progress-tracker {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.progress-step {
+    width: 30%;
+    text-align: center;
     font-weight: bold;
+    padding: 0.75rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
 }
-input, lightning-input {
-    pointer-events: auto !important;  /* Ensure the inputs are clickable */
-    z-index: 10;  /* Ensure the inputs are above any other content */
+
+.progress-step.completed {
+    color: #2e9a5b;
+    background-color: rgba(46, 154, 91, 0.1);
 }
-input, lightning-input {
-    width: 100%;  /* Ensure the input takes the full width */
-    padding: 10px; /* Add some padding for better interaction */
+
+.progress-step.in-progress {
+    color: #0070d2;
+    background-color: rgba(0, 112, 210, 0.1);
 }
-.packages-container, .package-card, .card-content {
-    overflow: visible !important; /* Ensure content isn't hidden */
+
+.progress-step.not-started {
+    color: #bbb;
+    background-color: rgba(187, 187, 187, 0.1);
 }
+
+/* ===========================
+   Responsiveness
+   =========================== */
+@media (max-width: 768px) {
+    .slds-modal__container {
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+
+    .progress-tracker {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .progress-step {
+        width: 80%;
+        margin-bottom: 1rem;
+    }
+}
+.copper-icon lightning-icon svg {
+    fill: #b87333;
+}
+
+.silver-icon lightning-icon svg {
+    fill: #C0C0C0;
+}
+
+.gold-icon lightning-icon svg {
+    fill: #FFD700;
+}
+
 

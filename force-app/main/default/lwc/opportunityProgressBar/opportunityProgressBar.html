@@ -1,0 +1,36 @@
+<template>
+    <template if:true={opportunity}>
+        <div class="title-container">
+            <h2 class="progress-title">📊 Current Stage: {opportunity.StageName}</h2>
+            <p class="subtitle">Track the opportunity as it moves through the sales pipeline</p>
+        </div>
+
+        <div class="progress-container">
+            <template for:each={getStages} for:item="stage">
+                <div key={stage.name} class={stage.className}>
+                    <span>{stage.name}</span>
+                </div>
+            </template>
+        </div>
+
+        <!-- 📞 Message for Prospecting -->
+        <template if:true={isProspectingStage}>
+            <div class="qualification-message animate-fade-in">
+                📤 Please upload an Excel or CSV file containing contact details.<br/>
+                Required fields: <strong>First Name</strong>, <strong>Last Name</strong>, <strong>Email</strong>, 
+                <strong>Phone</strong>, <strong>Birthdate</strong>, <strong>Title</strong>   
+          
+         
+            <lightning-file-upload
+            class="upload-box"
+            label="Upload a document for Qualification"
+            name="fileUploader"
+            record-id={opportunity.Id}
+            accept=".csv,.xlsx"
+            onuploadfinished={handleUploadFinished}>
+        </lightning-file-upload>  
+    </div>   
+        </template>
+
+      </template>
+</template>

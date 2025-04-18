@@ -2,6 +2,9 @@ import { LightningElement, wire, track } from 'lwc';
 import getInsurancePackages from '@salesforce/apex/AllPackages.getInsurancePackages';
 import createLead from '@salesforce/apex/AllPackages.createLead';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import copper from '@salesforce/resourceUrl/copper';
+import silver from '@salesforce/resourceUrl/silver';
+import gold from '@salesforce/resourceUrl/gold';
 
 export default class AllPackages extends LightningElement {
     @track packages = [];
@@ -12,37 +15,62 @@ export default class AllPackages extends LightningElement {
     @track mobile = ''; 
     @track company = ''; 
     @track title = ''; 
-    @track numEmployees = ''; 
+    @track numEmployees = '';
+    @track Industry = ''; 
+    @track leadSource = ''; 
+
 
     @wire(getInsurancePackages)
     wiredPackages({ data, error }) {
         if (data) {
-            this.packages = data.map(pkg => ({
-                productName: pkg.Name,
-                productCode: pkg.ProductCode,
-                annualPremium: pkg.Annual_Premium__c,
-                coverageLimit: pkg.Coverage_Limit__c,
-                deductible: pkg.Deductible__c,
-                reimbursementRate: pkg.Reimbursement_Rate__c,
-                contractDuration: pkg.Contract_Duration__c,
-                description: pkg.Description,
-                category: pkg.Category__c,
-                exclusions: pkg.Exclusions__c,
-                additionalBenefits: pkg.Additional_Benefits__c,
-                minimumAge: pkg.Minimum_Age__c,
-                maximumAge: pkg.Maximum_Age__c,
-                discounts: pkg.Discounts__c,
-                renewalConditions: pkg.Renewal_Conditions__c,
-                status: pkg.Status__c,
-                type: pkg.Type__c,
-                showDetails: false,
-                statusClass: this.getStatusClass(pkg.Status__c)  
-            }));
+            this.packages = data.map(pkg => {
+                let imageUrl;
+                let iconClass = ''; // New variable for the icon class
+    
+                switch (pkg.Name) {
+                    case 'Basic Insurance Package':
+                        imageUrl = copper;
+                        break;
+                    case 'Standard Insurance Package':
+                        imageUrl = silver;
+                        break;
+                    case 'Premium Insurance Package':
+                        imageUrl = gold;
+                        break;
+                    default:
+                        iconClass = 'slds-icon_container slds-icon-standard-shield'; // Add the icon class for packages that don't match
+                        imageUrl = ''; // No image for these packages
+                }
+    
+                return {
+                    productName: pkg.Name,
+                    productCode: pkg.ProductCode,
+                    annualPremium: pkg.Annual_Premium__c,
+                    coverageLimit: pkg.Coverage_Limit__c,
+                    deductible: pkg.Deductible__c,
+                    reimbursementRate: pkg.Reimbursement_Rate__c,
+                    contractDuration: pkg.Contract_Duration__c,
+                    description: pkg.Description,
+                    category: pkg.Category__c,
+                    exclusions: pkg.Exclusions__c,
+                    additionalBenefits: pkg.Additional_Benefits__c,
+                    minimumAge: pkg.Minimum_Age__c,
+                    maximumAge: pkg.Maximum_Age__c,
+                    discounts: pkg.Discounts__c,
+                    renewalConditions: pkg.Renewal_Conditions__c,
+                    status: pkg.Status__c,
+                    type: pkg.Type__c,
+                    showDetails: false,
+                    imageUrl,
+                    iconClass, // Store the iconClass if needed
+                    statusClass: this.getStatusClass(pkg.Status__c)
+                };
+            });
         } else if (error) {
             console.error('Error fetching packages', error);
         }
     }
-
+    
     getStatusClass(status) {
         switch (status) {
             case 'Active':
@@ -64,6 +92,8 @@ export default class AllPackages extends LightningElement {
         this.company = '';
         this.title = '';
         this.numEmployees = '';
+        this.Industry = ''; 
+        this.leadSource = '';
     }
     
     closeModal() {
@@ -73,7 +103,6 @@ export default class AllPackages extends LightningElement {
     handleInputChange(event) {
         this[event.target.name] = event.target.value;
     }
-
     handleSubmit() {
         if (!this.selectedPackage || !this.selectedPackage.productCode) {
             this.dispatchEvent(
@@ -86,7 +115,7 @@ export default class AllPackages extends LightningElement {
             return;
         }
     
-        if (this.name && this.email && this.mobile && this.company && this.title) {
+        if (this.name && this.email && this.mobile && this.company && this.title && this.numEmployees && this.Industry && this.leadSource) {
             createLead({ 
                 name: this.name, 
                 email: this.email, 
@@ -94,7 +123,9 @@ export default class AllPackages extends LightningElement {
                 company: this.company,
                 title: this.title,
                 numEmployees: this.numEmployees ? parseInt(this.numEmployees, 10) : null,
-                productCode: this.selectedPackage.productCode 
+                productCode: this.selectedPackage.productCode,  // Utilisation du productCode
+                leadSource: this.leadSource,
+                Industry: this.Industry
             })
             .then(result => {
                 if (result === 'Success') {
@@ -131,6 +162,7 @@ export default class AllPackages extends LightningElement {
         }
     }
     
+    
     toggleAccordion(event) {
         const productCode = event.target.dataset.id;
         const packageIndex = this.packages.findIndex(pkg => pkg.productCode === productCode);
@@ -139,4 +171,21 @@ export default class AllPackages extends LightningElement {
             this.packages = [...this.packages];
         }
     }
+
+    leadSourceOptions = [
+        { label: 'Phone Inquiry', value: 'Phone Inquiry' },
+        { label: 'Partner Referral', value: 'Partner Referral' },
+        { label: 'Web', value: 'Web' },
+        { label: 'Purchased List', value: 'Purchased List' },
+        { label: 'Other', value: 'Other' },
+    ];
+    IndustryOptions = [
+        { label: 'Agriculture ', value: 'Agriculture ' },
+        { label: 'Apparel ', value: 'Apparel ' },
+        { label: 'Banking ', value: 'Banking ' },
+        { label: 'Biotechnology ', value: 'Biotechnology ' },
+        { label: 'Chemicals ', value: 'Chemicals ' },
+        { label: 'Communications', value: 'Communications' },
+        { label: 'Construction ', value: 'Construction ' }
+    ];
 }

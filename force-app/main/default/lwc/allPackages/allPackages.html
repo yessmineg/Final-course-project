@@ -1,96 +1,138 @@
 <template>
-    <div class="packages-container slds-grid slds-wrap">
-        <template if:true={packages}>
-            <template for:each={packages} for:item="pkg">
-                <div class="slds-col slds-size_1-of-2 slds-p-around_small" key={pkg.productCode}>
-                    <div class="package-card">
-                        <lightning-card title={pkg.productName} icon-name="utility:insurance">
-                            <div class="card-content">
-                                <div class="basic-info">
-                                    <p><strong>Code:</strong> {pkg.productCode}</p>
-                                    <p><strong>Status:</strong>
-                                        <span class={pkg.statusClass}>{pkg.status}</span>
-                                    </p>
-                                    <p><strong>Annual Premium:</strong> {pkg.annualPremium}</p>
-                                    <p><strong>Coverage Limit:</strong> {pkg.coverageLimit}</p>
-                                    <p><strong>Deductible:</strong> {pkg.deductible}</p>
-                                    <p><strong>Reimbursement Rate:</strong> {pkg.reimbursementRate}</p>
-                                    <p><strong>Contract Duration:</strong> {pkg.contractDuration}</p>
-                                    <p><strong>Type of insurance:</strong> {pkg.type}</p>
-                                </div>
-
-                                <div class="accordion">
-                                    <lightning-button variant="neutral" label="More Details" onclick={toggleAccordion} data-id={pkg.productCode}></lightning-button>
-                                    <template if:true={pkg.showDetails}>
-                                        <div class="additional-info">
-                                            <p><strong>Description:</strong> {pkg.description}</p>
-                                            <p><strong>Category:</strong> {pkg.category}</p>
-                                            <p><strong>Exclusions:</strong> {pkg.exclusions}</p>
-                                            <p><strong>Additional Benefits:</strong> {pkg.additionalBenefits}</p>
-                                            <p><strong>Min Age:</strong> {pkg.minimumAge}</p>
-                                            <p><strong>Max Age:</strong> {pkg.maximumAge}</p>
-                                            <p><strong>Discounts:</strong> {pkg.discounts}</p>
-                                            <p><strong>Renewal Conditions:</strong> {pkg.renewalConditions}</p>
-
-                                            <lightning-button variant="brand" label="I'm interested in this offer" 
-                                            onclick={openModal} 
-                                            data-id={pkg.productCode}>
-                                        </lightning-button>
-                                        
-
-                                        </div>
-                                    </template>
-                                </div>
+    <lightning-card title="Available Insurance Packages" icon-name="custom:custom14">
+        <div class="slds-p-around_medium">
+            <template if:true={packages}>
+                <template for:each={packages} for:item="pkg">
+                    <div key={pkg.productCode} class="package-card slds-box slds-m-bottom_medium">
+                        <div class="slds-grid slds-wrap slds-align-top">
+                            
+                            <!-- IMAGE COLUMN -->
+                            <div class="slds-col slds-size_1-of-4 slds-text-align_center slds-align_absolute-center">
+                                <template if:true={pkg.imageUrl}>
+                                    <img src={pkg.imageUrl} alt="Package Image" class="package-image" style="max-width: 100%; height: auto; max-height: 200px;" />
+                                </template>
+                                <template if:false={pkg.imageUrl}>
+                                    <lightning-icon 
+                                        icon-name="utility:shield" 
+                                        size="large" 
+                                        alternative-text="Insurance Icon" 
+                                        class={pkg.iconClass}
+                                        style="transform: scale(3.0); height: auto;">
+                                    </lightning-icon>
+                                </template>
                             </div>
-                        </lightning-card>
+                            
+                            
+                            
+                            <!-- TEXT COLUMN -->
+                            <div class="slds-col slds-size_2-of-4">
+                                <h2 class="slds-text-heading_medium">{pkg.productName}</h2>
+                                <p class="slds-text-title"><strong> Description :</strong> {pkg.description}</p>
+                                <p class="slds-text-title"><strong> Type of Insurance :</strong> {pkg.type}</p>
+                                <p class="slds-text-title slds-text-color_default">Premium: <span class="premium">${pkg.annualPremium}</span></p>
+                                <p class={pkg.statusClass}>{pkg.status}</p>
+                            </div>
+
+                            <!-- ACTION BUTTON -->
+                            <div class="slds-col slds-size_1-of-4 slds-text-align_right">
+                                <lightning-button-icon 
+                                    icon-name="utility:down" 
+                                    size="medium" 
+                                    variant="bare"
+                                    data-id={pkg.productCode}
+                                    onclick={toggleAccordion}>
+                                </lightning-button-icon>
+                            </div>
+                        </div>
+
+                        <!-- DETAILS SECTION -->
+                        <template if:true={pkg.showDetails}>
+                            <div class="details slds-m-top_small slds-grid slds-grid_vertical slds-gutters_small">
+                                <p class="slds-text-title"><strong>Coverage:</strong> {pkg.coverageLimit}</p>
+                                <p class="slds-text-title"><strong>Deductible:</strong> {pkg.deductible}</p>
+                                <p class="slds-text-title"><strong>Reimbursement Rate:</strong> {pkg.reimbursementRate}%</p>
+                                <p class="slds-text-title"><strong>Duration:</strong> {pkg.contractDuration}</p>
+                                <p class="slds-text-title"><strong>Discounts:</strong> {pkg.discounts}</p>
+                                <p class="slds-text-title" ><strong>Minimum age:</strong> {pkg.minimumAge}</p>
+                                <p class="slds-text-title"><strong>Maximum age:</strong> {pkg.maximumAge}</p>
+                                <p class="slds-text-title"><strong>Exclusions:</strong> {pkg.exclusions}</p>
+                                <p class="slds-text-title"><strong>Renewal Conditions:</strong> {pkg.renewalConditions}</p>
+                            </div>
+                            <lightning-button label="I'm Interested" variant="brand" data-id={pkg.productCode} onclick={openModal}></lightning-button>
+                        </template>
                     </div>
-                </div>
+                </template>
             </template>
-        </template>
-        <template if:false={packages}>
-            <p>Loading...</p>
-        </template>
-    </div>
+        </div>
+    </lightning-card>
+
+    <!-- Modal -->
     <template if:true={isModalOpen}>
         <section role="dialog" class="slds-modal slds-fade-in-open">
             <div class="slds-modal__container">
-                <!-- Modal Header -->
                 <header class="slds-modal__header">
-                    <button class="slds-button slds-button_icon slds-modal__close"
-                        title="Close" onclick={closeModal}>
-                        <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
-                    </button>
-                    <h2 id="modal-heading" class="slds-text-heading_medium">
-                        Interested in {selectedPackage.productName}
-                    </h2>
+                    <h2 class="slds-text-heading_medium">Register Your Interest</h2>
+                    <lightning-button-icon icon-name="utility:close" variant="bare-inverse" class="slds-modal__close" onclick={closeModal}></lightning-button-icon>
                 </header>
-    
-                <!-- Modal Content -->
+
                 <div class="slds-modal__content slds-p-around_medium">
-                    <lightning-input label="Name" name="name" value={name} onchange={handleInputChange} required></lightning-input>
-    
-                    <lightning-input label="Email" name="email" value={email} type="email" onchange={handleInputChange} required></lightning-input> 
-    
-                    <lightning-input label="Mobile" name="mobile" type="tel" value={mobile} onchange={handleInputChange} required></lightning-input>
-    
-                    <lightning-input label="Company" name="company" value={company} onchange={handleInputChange} required></lightning-input>
-    
-                    <lightning-input label="Title" name="title" value={title} onchange={handleInputChange} required></lightning-input>
-    
-                    <lightning-input label="Number of Employees" name="numEmployees" type="number" value={numEmployees} onchange={handleInputChange}></lightning-input>
+                    <div class="package-summary slds-m-bottom_medium">
+                        <h3 class="slds-text-heading_small">Package Details</h3>
+                        <p><strong>Package Name:</strong> {selectedPackage.productName}</p>
+                        <p><strong>Description:</strong> {selectedPackage.description}</p>
+                        <p><strong>Category:</strong> {selectedPackage.category}</p>
+                        <p><strong>Premium:</strong> ${selectedPackage.annualPremium}</p>
+                        <p><strong>Coverage Limit:</strong> {selectedPackage.coverageLimit}</p>
+                        <p><strong>Duration:</strong> {selectedPackage.contractDuration} months</p>
+                    </div>
+
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                            <lightning-input label="Full Name" name="name" value={name} onchange={handleInputChange} required></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+                            <lightning-input type="email" label="Email" name="email" value={email} onchange={handleInputChange} required></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                            <lightning-input type="tel" label="Mobile" name="mobile" value={mobile} onchange={handleInputChange} required></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+                            <lightning-input label="Company Name" name="company" value={company} onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+                            <lightning-input label="Number of employees" name="numEmployees" value={numEmployees} onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+                            <lightning-input label="Title" name="title" value={title} onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                            <lightning-combobox 
+                                label="Industry"
+                                name="Industry"
+                                value={Industry}
+                                options={IndustryOptions}
+                                onchange={handleInputChange}
+                                required>
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                            <lightning-combobox 
+                                label="How did you hear about us?"
+                                name="leadSource"
+                                value={leadSource}
+                                options={leadSourceOptions}
+                                onchange={handleInputChange}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
                 </div>
-    
-                <!-- Modal Footer -->
+
                 <footer class="slds-modal__footer">
-                    <lightning-button label="Cancel" onclick={closeModal} variant="neutral"></lightning-button>
-                    
-                    <lightning-button label="Submit" variant="brand" onclick={handleSubmit} class="slds-m-left_small"></lightning-button>
+                    <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                    <lightning-button label="Submit" variant="brand" onclick={handleSubmit}></lightning-button>
                 </footer>
             </div>
         </section>
-    
-        <!-- Background Overlay -->
         <div class="slds-backdrop slds-backdrop_open"></div>
     </template>
-    
 </template>

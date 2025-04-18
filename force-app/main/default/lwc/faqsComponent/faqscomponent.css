@@ -1,72 +1,45 @@
-.faq-container {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
 
-.faq-item {
-    background-color: #f9f9f9;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-}
+    .faq-container {
+      max-width: 850px;
+      margin: auto;
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      padding: 50px 40px;
+    }
 
-.faq-item:hover {
-    background-color: #f1f1f1;
-}
+    .faq-title {
+      text-align: center;
+      color: #325166;
+      margin-bottom: 40px;
+      font-size: 28px;
+      font-weight: 700;
+    }
 
-.faq-question {
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    color: #0070d2;
-    margin-bottom: 0.5rem;
-    transition: color 0.3s ease;
-}
+    .faq-item {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e0e0e0;
+    }
 
-.faq-question:hover {
-    color: #005fa3;
-}
+    .faq-question {
+      font-size: 20px;
+      font-weight: 600;
+      color: #2c3e50;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 8px;
+      border-radius: 8px;
+    }
 
-.faq-answer {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #333;
-    margin-top: 0.5rem;
-}
+    .faq-question:hover {
+      background-color: #e8f0f7;
+      color: #1a3b5d;
+    }
 
-.no-faqs {
-    font-size: 1.2rem;
-    color: #777;
-    text-align: center;
-}
-
-.lightning-card {
-    border: none;
-    box-shadow: none;
-}
-
-.faq-question::after {
-    content: '\25B6'; /* Right-pointing triangle */
-    font-size: 1.5rem;
-    margin-left: 10px;
-    transition: transform 0.3s ease;
-    display: inline-block;
-}
-
-.faq-question[aria-expanded="true"]::after {
-    transform: rotate(90deg); /* Rotate to point downward when expanded */
-}
-
-.faq-item {
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.faq-item:hover {
-    background-color: #eef2f7;
-}
+    .faq-answer {
+      font-size: 16px;
+      color: #4a4a4a;
+      margin-top: 15px;
+      line-height: 1.7;
+    }

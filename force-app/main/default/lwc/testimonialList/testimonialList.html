@@ -13,7 +13,7 @@
                 <template for:each={testimonials} for:item="testimonial">
                     <div key={testimonial.id} class="testimonial">
                         <div class="testimonial-header">
-                            <img src={testimonial.avatar} alt="User Avatar" class="testimonial-avatar" />
+                            <lightning-icon icon-name="standard:user" size="large" class="testimonial-avatar"></lightning-icon>
                             <div>
                                 <strong>{testimonial.author}</strong>
                                 <em>({testimonial.date})</em>
