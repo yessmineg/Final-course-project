@@ -1,0 +1,111 @@
+/* Card styling */
+.custom-card {
+    max-width: 850px;
+    margin: 2rem auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    background-color: #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Helper text with gradient and spacing */
+.helper-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: transparent;
+    background: linear-gradient(to right, #325166, #99cade);
+    background-clip: text;
+    margin: 0 1.5rem 1.5rem;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Form container with background and border-radius */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: #fafafa;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Full-width inputs */
+.full-width {
+    width: 100%;
+}
+
+/* Styling for individual fields */
+.field {
+    margin-bottom: 1.25rem;
+}
+
+/* Extra spacing for textarea */
+.textarea-large {
+    min-height: 120px;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+/* Tight spacing at the bottom of fields */
+.tight-bottom {
+    margin-bottom: 1.25rem;
+}
+
+/* Enhanced Submit button */
+.submit-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+.submit-button lightning-button {
+    min-width: 180px;
+    font-weight: 700;
+    background-color: #2477cc; /* Button color */
+    border-radius: 12px;
+    color: white;
+    padding: 0.8rem 1.6rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-button lightning-button:hover {
+    background-color: #264e52; /* Darker shade for hover */
+    transform: translateY(-2px);
+}
+
+/* Gradient background inputs and icon styling */
+.gradient-input lightning-input, .gradient-input lightning-combobox, .gradient-input lightning-textarea {
+    background: linear-gradient(145deg, #e9c46a, #2a9d8f);
+    border-radius: 10px;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.gradient-input lightning-input:focus, .gradient-input lightning-combobox:focus, .gradient-input lightning-textarea:focus {
+    border-color: #2a9d8f;
+    box-shadow: 0 0 8px rgba(42, 157, 143, 0.3);
+}
+
+/* Responsive tweaks */
+@media screen and (max-width: 600px) {
+    .custom-card {
+        margin: 1rem;
+    }
+
+    .slds-p-around_medium {
+        padding: 1rem;
+    }
+
+    .submit-button {
+        justify-content: center;
+    }
+}

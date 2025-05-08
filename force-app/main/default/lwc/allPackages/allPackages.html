@@ -74,7 +74,7 @@
                     <h2 class="slds-text-heading_medium">Register Your Interest</h2>
                     <lightning-button-icon icon-name="utility:close" variant="bare-inverse" class="slds-modal__close" onclick={closeModal}></lightning-button-icon>
                 </header>
-
+    
                 <div class="slds-modal__content slds-p-around_medium">
                     <div class="package-summary slds-m-bottom_medium">
                         <h3 class="slds-text-heading_small">Package Details</h3>
@@ -85,48 +85,66 @@
                         <p><strong>Coverage Limit:</strong> {selectedPackage.coverageLimit}</p>
                         <p><strong>Duration:</strong> {selectedPackage.contractDuration} months</p>
                     </div>
-
-                    <div class="slds-grid slds-wrap">
-                        <div class="slds-col slds-size_1-of-2 slds-p-right_small">
-                            <lightning-input label="Full Name" name="name" value={name} onchange={handleInputChange} required></lightning-input>
+    
+                    <!-- Section: Informations personnelles -->
+                    <div class="slds-box slds-m-bottom_medium">
+                        <h3 class="slds-text-title_bold slds-m-bottom_small">Informations personnelles</h3>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                                <lightning-input label="Full Name" name="name" value={name} onchange={handleInputChange} required></lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+                                <lightning-input type="email" label="Email" name="email" value={email} onchange={handleInputChange} required></lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                                <lightning-input type="tel" label="Mobile" name="mobile" value={mobile} onchange={handleInputChange} required></lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+                                <lightning-input label="Title" name="title" value={title} onchange={handleInputChange}></lightning-input>
+                            </div>
                         </div>
-                        <div class="slds-col slds-size_1-of-2 slds-p-left_small">
-                            <lightning-input type="email" label="Email" name="email" value={email} onchange={handleInputChange} required></lightning-input>
+                    </div>
+    
+                    <!-- Section: Adresse entreprise -->
+                    <div class="slds-box slds-m-bottom_medium">
+                        <h3 class="slds-text-title_bold slds-m-bottom_small">Informations sur l’entreprise</h3>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                                <lightning-input label="Company Name" name="company" value={company} onchange={handleInputChange}></lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+                                <lightning-input label="Number of employees" name="numEmployees" value={numEmployees} onchange={handleInputChange}></lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                                <lightning-combobox 
+                                    label="Industry"
+                                    name="Industry"
+                                    value={Industry}
+                                    options={IndustryOptions}
+                                    onchange={handleInputChange}
+                                    required>
+                                </lightning-combobox>
+                            </div>
                         </div>
-                        <div class="slds-col slds-size_1-of-2 slds-p-right_small">
-                            <lightning-input type="tel" label="Mobile" name="mobile" value={mobile} onchange={handleInputChange} required></lightning-input>
-                        </div>
-                        <div class="slds-col slds-size_1-of-2 slds-p-left_small">
-                            <lightning-input label="Company Name" name="company" value={company} onchange={handleInputChange}></lightning-input>
-                        </div>
-                        <div class="slds-col slds-size_1-of-2 slds-p-left_small">
-                            <lightning-input label="Number of employees" name="numEmployees" value={numEmployees} onchange={handleInputChange}></lightning-input>
-                        </div>
-                        <div class="slds-col slds-size_1-of-2 slds-p-left_small">
-                            <lightning-input label="Title" name="title" value={title} onchange={handleInputChange}></lightning-input>
-                        </div>
-                        <div class="slds-col slds-size_1-of-2 slds-p-right_small">
-                            <lightning-combobox 
-                                label="Industry"
-                                name="Industry"
-                                value={Industry}
-                                options={IndustryOptions}
-                                onchange={handleInputChange}
-                                required>
-                            </lightning-combobox>
-                        </div>
-                        <div class="slds-col slds-size_1-of-2 slds-p-right_small">
-                            <lightning-combobox 
-                                label="How did you hear about us?"
-                                name="leadSource"
-                                value={leadSource}
-                                options={leadSourceOptions}
-                                onchange={handleInputChange}>
-                            </lightning-combobox>
+                    </div>
+    
+                    <!-- Section: Autres informations -->
+                    <div class="slds-box slds-m-bottom_medium">
+                        <h3 class="slds-text-title_bold slds-m-bottom_small">Autres informations</h3>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-combobox 
+                                    label="How did you hear about us?"
+                                    name="leadSource"
+                                    value={leadSource}
+                                    options={leadSourceOptions}
+                                    onchange={handleInputChange}>
+                                </lightning-combobox>
+                            </div>
                         </div>
                     </div>
                 </div>
-
+    
                 <footer class="slds-modal__footer">
                     <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
                     <lightning-button label="Submit" variant="brand" onclick={handleSubmit}></lightning-button>
@@ -135,4 +153,6 @@
         </section>
         <div class="slds-backdrop slds-backdrop_open"></div>
     </template>
+    
+    
 </template>

@@ -245,5 +245,20 @@ p.slds-text-title {
 .gold-icon lightning-icon svg {
     fill: #FFD700;
 }
+.copper-border {
+    border: 2px solid #b87333; /* Copper color */
+}
+
+.silver-border {
+    border: 2px solid #c0c0c0; /* Silver color */
+}
+
+.gold-border {
+    border: 2px solid #ffd700; /* Gold color */
+}
+
+.default-border {
+    border: 2px solid #cccccc; /* Default gray border */
+}
 
 

@@ -1,36 +1,73 @@
 <template>
     <template if:true={opportunity}>
-        <div class="title-container">
-            <h2 class="progress-title">📊 Current Stage: {opportunity.StageName}</h2>
-            <p class="subtitle">Track the opportunity as it moves through the sales pipeline</p>
+        <div class="opp-title-container">
+            <h2 class="opp-progress-title">📊 Current Stage: {opportunity.StageName}</h2>
+            <p class="opp-subtitle">Track the opportunity as it moves through the sales pipeline</p>
         </div>
 
-        <div class="progress-container">
+        <div class="opp-progress-container">
             <template for:each={getStages} for:item="stage">
-                <div key={stage.name} class={stage.className}>
-                    <span>{stage.name}</span>
+                <div key={stage.rawName} class={stage.className}>
+                    <span class="stage-label">{stage.name}</span>
                 </div>
             </template>
         </div>
 
-        <!-- 📞 Message for Prospecting -->
+        <!-- Prospecting -->
         <template if:true={isProspectingStage}>
-            <div class="qualification-message animate-fade-in">
-                📤 Please upload an Excel or CSV file containing contact details.<br/>
-                Required fields: <strong>First Name</strong>, <strong>Last Name</strong>, <strong>Email</strong>, 
-                <strong>Phone</strong>, <strong>Birthdate</strong>, <strong>Title</strong>   
-          
-         
-            <lightning-file-upload
-            class="upload-box"
-            label="Upload a document for Qualification"
-            name="fileUploader"
-            record-id={opportunity.Id}
-            accept=".csv,.xlsx"
-            onuploadfinished={handleUploadFinished}>
-        </lightning-file-upload>  
-    </div>   
+            <div class="opp-stage-message animate-fade-in">
+                <p class="upload-instruction">📤 Please upload an Excel or CSV file containing contact details.</p>
+                <p class="required-fields">
+                    Required fields: <strong>First Name</strong>, <strong>Last Name</strong>, 
+                    <strong>Email</strong>, <strong>Phone</strong>, <strong>Birthdate</strong>, <strong>Title</strong>
+                </p>
+
+                <lightning-file-upload
+                    class="opp-upload-box"
+                    label="Upload a document for Qualification"
+                    name="fileUploader"
+                    record-id={opportunity.Id}
+                    accept=".csv,.xlsx"
+                    onuploadfinished={handleUploadFinished}
+                    onerror={handleUploadError}>
+                </lightning-file-upload>
+            </div>
         </template>
 
-      </template>
+        <!-- Qualification -->
+        <template if:true={isQualificationStage}>
+            <div class="opp-quote-message animate-blink">
+                <p>📩 You will receive an email with the quote shortly.</p>
+                <p>Your quote for <strong>{productCode}</strong> will be sent to your email.</p>
+            </div>
+        </template>
+
+        <!-- Proposal / Price Quote -->
+        <template if:true={isProposalStage}>
+            <div class="opp-proposal-actions animate-fade-in">
+                <p class="quote-info">💬 You received a price quote for <strong>{productCode}</strong>.</p>
+                <div class="opp-button-group">
+                    <button class="btn-action btn-accept" onclick={handleAccept}>✅ I Accept the Offer</button>
+                    <button class="btn-action btn-reject" onclick={handleReject}>❌ I Reject the Offer</button>
+                </div>
+            </div>
+        </template>
+    </template>
+    <template if:true={isRejectModalOpen}>
+        <section>
+            <div >
+                <header >
+                    <h2 >Confirm Rejection</h2>
+                </header>
+                <div>
+                    <p>Are you sure you want to reject this offer? This will set the opportunity stage to <strong>Closed Lost</strong>.</p>
+                </div>
+                <footer >
+                    <button onclick={closeRejectModal}>Cancel</button>
+                    <button onclick={confirmReject}>Yes, Reject</button>
+                </footer>
+            </div>
+        </section>
+        <div></div>
+    </template>
 </template>

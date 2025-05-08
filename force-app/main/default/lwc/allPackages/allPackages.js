@@ -18,6 +18,12 @@ export default class AllPackages extends LightningElement {
     @track numEmployees = '';
     @track Industry = ''; 
     @track leadSource = ''; 
+    @track street = '';
+    @track city = '';
+    @track state = '';
+    @track postalCode = '';
+    @track country = '';
+
 
 
     @wire(getInsurancePackages)
@@ -125,7 +131,12 @@ export default class AllPackages extends LightningElement {
                 numEmployees: this.numEmployees ? parseInt(this.numEmployees, 10) : null,
                 productCode: this.selectedPackage.productCode,  // Utilisation du productCode
                 leadSource: this.leadSource,
-                Industry: this.Industry
+                Industry: this.Industry,
+                street: this.street,
+                city: this.city,
+                state: this.state,
+                postalCode: this.postalCode,
+                country: this.country
             })
             .then(result => {
                 if (result === 'Success') {
