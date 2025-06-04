@@ -1,0 +1,45 @@
+:host {
+    display: block;
+    background-color: #f4f6f9;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.custom-title {
+    font-size: 1rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #325166, #99cade);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+}
+
+lightning-combobox {
+    margin-bottom: 1rem;
+}
+
+lightning-button {
+    font-weight: 600;
+}
+
+.slds-box {
+    background-color: #eef6fb;
+    border-left: 6px solid #0176d3;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #000000; /* Set text color to black */
+}
+
+.slds-box p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #000000; /* Ensure paragraph text is also black */
+}
+

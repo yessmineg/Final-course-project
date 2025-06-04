@@ -1,0 +1,45 @@
+<template>
+  <div class="card-container">
+    <div class="title-container">
+       ✨ <span class="gradient-text"> How to get insured ?</span>
+    </div>
+
+  <template for:each={steps} for:item="step">
+  <div key={step.title}>
+    <div class="card-wrapper">
+      <div class="card">
+        <div class="card-left">
+          <img src={step.image} alt="Step Image" />
+        </div>
+        <div class="card-right">
+          <h2>{step.title}</h2>
+          <lightning-formatted-rich-text value={step.description}></lightning-formatted-rich-text>
+        </div>
+      </div>
+    </div>
+
+    <template if:true={step.showArrow}>
+      <div class="arrow-container">
+        <span class="down-arrow">⬇</span>
+      </div>
+    </template>
+
+    <!-- Thicker arrow for the last card only -->
+    <template if:false={step.showArrow}>
+      <div class="arrow-container thick-arrow">
+        <span class="down-arrow">⬇⬇⬇</span>
+      </div>
+    </template>
+  </div>
+</template>
+
+    <div class="final-cta">
+      <div class="cta-content">
+        <p class="cta-message">
+          🎯 All clear? You're just one click away from finding the perfect protection.
+        </p>
+        <button class="cta-button" onclick={handleNavigate}>Check Our Products</button>
+      </div>
+    </div>
+  </div>
+</template>

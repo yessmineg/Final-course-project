@@ -1,18 +1,19 @@
-import { LightningElement, wire } from 'lwc';
+import { LightningElement, wire, api } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { refreshApex } from '@salesforce/apex';
+
 import getUserOpportunities from '@salesforce/apex/OpportunityController.getOpportunity';
 import updateStageToNegotiation from '@salesforce/apex/OpportunityController.updateStageToNegotiation';
-import { refreshApex } from '@salesforce/apex';
 import updateStageToClosedLost from '@salesforce/apex/OpportunityController.updateStageToClosedLost';
-
+import uploadFileToOpportunity from '@salesforce/apex/OpportunityController.uploadFileToOpportunity';
 
 export default class OpportunityProgressPath extends LightningElement {
-    opportunity;
+    @api opportunity;
     productCode;
     stages = ['Prospecting', 'Qualification', 'Proposal/Price Quote', 'Negotiation/Review', 'Closed'];
     currentStageIndex = -1;
     wiredOppResult;
-
+    isRejectModalOpen = false;
 
     stageIcons = {
         'Prospecting': '🕵️',
@@ -24,26 +25,26 @@ export default class OpportunityProgressPath extends LightningElement {
 
     @wire(getUserOpportunities)
     wiredOpp(result) {
-        this.wiredOppResult = result; // stocker le résultat wire pour refreshApex
+        this.wiredOppResult = result;
         const { data, error } = result;
-        if (data && data.length > 0) {
+
+        if (data?.length > 0) {
             this.opportunity = data[0];
             this.currentStageIndex = this.stages.indexOf(this.opportunity.StageName);
-            if (this.opportunity.OpportunityLineItems && this.opportunity.OpportunityLineItems.length > 0) {
-                this.productCode = this.opportunity.OpportunityLineItems[0].Product2.ProductCode;
+
+            const items = this.opportunity.OpportunityLineItems;
+            if (items?.length > 0) {
+                this.productCode = items[0].Product2?.ProductCode;
             }
         } else if (error) {
             this.showErrorToast(error.body.message);
         }
     }
-    
 
     get getStages() {
         return this.stages.map((stage, index) => {
-            let status = 'upcoming';
-            if (index < this.currentStageIndex) status = 'completed';
-            else if (index === this.currentStageIndex) status = 'current';
-
+            const status = index < this.currentStageIndex ? 'completed' :
+                           index === this.currentStageIndex ? 'current' : 'upcoming';
             return {
                 name: `${this.stageIcons[stage]} ${stage}`,
                 rawName: stage,
@@ -71,43 +72,17 @@ export default class OpportunityProgressPath extends LightningElement {
         return plainStage === this.opportunity.StageName;
     }
 
-    handleUploadFinished(event) {
-        const uploadedFiles = event.detail.files;
-        console.log('Files uploaded:', uploadedFiles);
-        this.showSuccessToast('File uploaded successfully!');
-    
-        // Refresh data after successful upload
-        refreshApex(this.wiredOppResult)
-            .then(() => {
-                console.log('Opportunity data refreshed after upload.');
-            })
-            .catch(error => {
-                console.error('Error refreshing data after upload:', error);
-                this.showErrorToast('Failed to refresh data after upload.');
-            });
-    }
-    
-
-    handleUploadError(event) {
-        console.error('Upload failed', event.detail);
-        this.showErrorToast('File upload failed!');
-    }
-
     handleAccept() {
         updateStageToNegotiation({ opportunityId: this.opportunity.Id })
             .then(() => {
                 this.showSuccessToast('You have accepted the offer! Stage updated to Negotiation/Review.');
-                // Optionnel : recharger les données
                 return refreshApex(this.wiredOppResult);
-
             })
             .catch(error => {
                 console.error('Error updating stage:', error);
                 this.showErrorToast('Failed to update opportunity stage.');
             });
     }
-    
-    isRejectModalOpen = false;
 
     handleReject() {
         this.isRejectModalOpen = true;
@@ -119,6 +94,7 @@ export default class OpportunityProgressPath extends LightningElement {
 
     confirmReject() {
         this.isRejectModalOpen = false;
+
         updateStageToClosedLost({ opportunityId: this.opportunity.Id })
             .then(() => {
                 this.showErrorToast('You have rejected the offer. Stage updated to Closed Lost.');
@@ -130,12 +106,42 @@ export default class OpportunityProgressPath extends LightningElement {
             });
     }
 
-   
-   
+    handleFileChange(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const base64 = reader.result?.split(',')[1];
+            if (!base64) {
+                this.showErrorToast('Failed to read file content.');
+                return;
+            }
+            this.uploadFile(base64, file.name);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    uploadFile(base64Data, fileName) {
+        uploadFileToOpportunity({
+            opportunityId: this.opportunity.Id,
+            base64Data,
+            fileName
+        })
+            .then(() => {
+                this.showSuccessToast('File uploaded and stage updated to Qualification.');
+                return refreshApex(this.wiredOppResult);
+            })
+            .catch(error => {
+                console.error('File upload failed:', error);
+                this.showErrorToast('Failed to upload file and update stage.');
+            });
+    }
+
     showSuccessToast(message) {
         this.dispatchEvent(new ShowToastEvent({
             title: 'Success',
-            message: message,
+            message,
             variant: 'success',
         }));
     }
@@ -143,7 +149,7 @@ export default class OpportunityProgressPath extends LightningElement {
     showErrorToast(message) {
         this.dispatchEvent(new ShowToastEvent({
             title: 'Error',
-            message: message,
+            message,
             variant: 'error',
         }));
     }

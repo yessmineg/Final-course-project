@@ -1,7 +1,8 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 import submitComplaint from '@salesforce/apex/ComplaintController.submitComplaint';
 import submitReimbursement from '@salesforce/apex/ReimbursementRequestController.submitReimbursement';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import getContactIdForCurrentUser from '@salesforce/apex/ReimbursementRequestController.getContactIdForCurrentUser';
 
 export default class SubmitRequestForm extends LightningElement {
     @track selectedType = '';
@@ -26,6 +27,8 @@ export default class SubmitRequestForm extends LightningElement {
             { label: 'Product Issue', value: 'Product Issue' },
             { label: 'Service Issue', value: 'Service Issue' },
             { label: 'Billing Problem', value: 'Billing Problem' },
+            { label: 'Reimbursement delay', value: 'Reimbursement delay' },
+            { label: 'incorrect billing', value: 'incorrect billing' },
             { label: 'Other', value: 'Other' }
         ];
     }
@@ -82,56 +85,87 @@ export default class SubmitRequestForm extends LightningElement {
         this.title = '';
         this.selectedProduct = '';
     }
+async handleSubmitComplaint() {
+    try {
+        console.log('Submitting complaint with:', {
+            category: this.category,
+            name: this.name,
+            description: this.description,
+            product: this.selectedProduct,
+            contactId: this.contactId
+        });
 
-    async handleSubmitComplaint() {
-        try {
-            await submitComplaint({
-                category: this.category,
-                name: this.name,
-                description: this.description,
-                product: this.selectedProduct
-            });
+        await submitComplaint({
+            category: this.category,
+            name: this.name,
+            description: this.description,
+            product: this.selectedProduct,
+            contactId: this.contactId
+        });
 
-            this.dispatchEvent(new ShowToastEvent({
-                title: 'Success',
-                message: 'Complaint submitted successfully!',
-                variant: 'success'
-            }));
+        this.dispatchEvent(new ShowToastEvent({
+            title: 'Success',
+            message: 'Complaint submitted successfully!',
+            variant: 'success'
+        }));
 
-            this.resetForm();
-        } catch (error) {
-            this.dispatchEvent(new ShowToastEvent({
-                title: 'Error',
-                message: error.body ? error.body.message : error.message,
-                variant: 'error'
-            }));
-        }
+        this.resetForm();
+    } catch (error) {
+        console.error('Error in handleSubmitComplaint:', error);
+        this.dispatchEvent(new ShowToastEvent({
+            title: 'Error',
+            message: error.body ? error.body.message : error.message,
+            variant: 'error'
+        }));
+    }
+}
+
+async handleSubmitReimbursement() {
+    try {
+        // Pass the contactId to Apex along with other fields to associate the file
+        const result = await submitReimbursement({
+            amountRequested: this.amountRequested,
+            description: this.description,
+            paymentMethod: this.paymentMethod,
+            receiptAttached: this.receiptAttached,
+            title: this.title,
+            product: this.selectedProduct,
+            status: 'Submitted',
+            contactId: this.contactId  // Contact ID to link the uploaded file
+        });
+
+        this.dispatchEvent(new ShowToastEvent({
+            title: 'Success',
+            message: 'Reimbursement request submitted successfully!',
+            variant: 'success'
+        }));
+
+        this.resetForm();
+    } catch (error) {
+        this.dispatchEvent(new ShowToastEvent({
+            title: 'Error',
+            message: error.body ? error.body.message : error.message,
+            variant: 'error'
+        }));
+    }
+}
+
+
+    @api recordId; // Provided by the page automatically
+    showUpload = false;
+
+    handleCheckboxChange(event) {
+        this.showUpload = event.target.checked;
     }
 
-    async handleSubmitReimbursement() {
-        try {
-            await submitReimbursement({
-                amountRequested: this.amountRequested,
-                description: this.description,
-                paymentMethod: this.paymentMethod,
-                receiptAttached: this.receiptAttached,
-                title: this.title,
-                product: this.selectedProduct
-            });
+@track contactId; // L’ID du contact auquel sera liée la pièce jointe
 
-            this.dispatchEvent(new ShowToastEvent({
-                title: 'Success',
-                message: 'Reimbursement request submitted successfully!',
-                variant: 'success'
-            }));
-
-            this.resetForm();
-        } catch (error) {
-            this.dispatchEvent(new ShowToastEvent({
-                title: 'Error',
-                message: error.body ? error.body.message : error.message,
-                variant: 'error'
-            }));
-        }
+handleUploadFinished(event) {
+    const uploadedFiles = event.detail.files;
+    if (uploadedFiles.length > 0) {
+        const fileName = uploadedFiles[0].name;
+        this.showToast('Success', `File ${fileName} uploaded successfully.`, 'success');
     }
+}
+
 }

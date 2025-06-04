@@ -1,0 +1,44 @@
+<template>
+    <lightning-card title="My Reimbursement Requests" icon-name="standard:record">
+        <div class="custom-card-body">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </template>
+
+            <template if:true={adjustedCoverageLimit}>
+                <div class="slds-text-heading_small slds-m-bottom_x-small">
+                    <strong>Remaining Coverage Limit:</strong> {formattedAnnualCoverageLimit}
+                </div>
+            </template>
+
+            <template if:true={exclusions}>
+                <div class="slds-text-body_regular slds-m-bottom_small">
+                    <strong>Exclusions:</strong> {exclusions}
+                </div>
+            </template>
+
+            <template if:true={reimbursements.length}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={reimbursements}
+                    columns={columns}
+                    hide-checkbox-column
+                    class="custom-datatable"
+                ></lightning-datatable>
+            </template>
+
+            <template if:true={error}>
+                <div class="error-message">
+                    <lightning-icon
+                        icon-name="utility:error"
+                        alternative-text="Error"
+                        size="small"
+                        class="error-icon"
+                    ></lightning-icon>
+                    <span>{error}</span>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
+ 

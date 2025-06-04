@@ -17,133 +17,204 @@
 
             <!-- Conditional Form Sections -->
             <div class="form-sections">
-                <!-- Complaint Form -->
-                <template if:true={isComplaintSelected}>
-                    <div class="section">
-                        <lightning-input 
-                            label="Name" 
-                            value={name} 
-                            onchange={handleInputChange} 
-                            data-id="name"
-                            class="form-field">
-                        </lightning-input>
-                    </div>
 
-                    <div class="section">
-                        <lightning-combobox
-                            label="Category"
-                            value={category}
-                            options={categoryOptions}
-                            onchange={handleInputChange}
-                            data-id="category"
-                            class="form-field">
-                        </lightning-combobox>
-                    </div>
+               <!-- Complaint Form -->
+<template if:true={isComplaintSelected}>
+    <div style="font-size: 1rem; font-weight: 600; color: #4a4a4a; text-align: left; margin-top: -0.5rem; margin-bottom: 1rem; letter-spacing: 0.5px; font-style: italic; animation: fadeInSlide 0.6s ease-in-out;">
+        ❗ Make sure to describe your problem in detail
+    </div>
 
-                    <!-- Show this combo box if category is 'Product Issue' -->
-                    <template if:true={isProductIssue}>
-                        <div class="section">
-                            <lightning-combobox
-                                label="Product"
-                                value={selectedProduct}
-                                options={productOptions}
-                                onchange={handleInputChange}
-                                data-id="selectedProduct"
-                                class="form-field">
-                            </lightning-combobox>
-                        </div>
-                    </template>
+    <!-- Section 1: Personal Information -->
+    <div class="section">
+        <h3 class="section-title">👤 Your Information</h3>
+        <lightning-input 
+            label="title" 
+            placeholder="Enter the title"
+            value={name} 
+            onchange={handleInputChange} 
+            data-id="name"
+            class="form-field">
+        </lightning-input>
+    </div>
 
-                    <div class="section">
-                        <lightning-textarea
-                            label="Description"
-                            data-id="description"     
-                            value={description}
-                            onchange={handleInputChange}
-                            class="form-field large-textarea">
-                        </lightning-textarea>
-                    </div>
+    <!-- Section 2: Complaint Category -->
+    <div class="section">
+        <h3 class="section-title">📑 Complaint Details</h3>
+        <lightning-combobox
+            label="Select a Complaint Category"
+            value={category}
+            options={categoryOptions}
+            onchange={handleInputChange}
+            data-id="category"
+            class="form-field">
+        </lightning-combobox>
+    </div>
 
-                    <div class="section submit-button">
-                        <lightning-button
-                            variant="brand"
-                            label="Submit Complaint"
-                            onclick={handleSubmitComplaint}>
-                        </lightning-button>
-                    </div>
-                </template>
+    <!-- Section 3: Product Specific (Conditional) -->
+    <template if:true={isProductIssue}>
+        <div class="section">
+            <h3 class="section-title">🔧 Product Information</h3>
+            <lightning-combobox
+                label="Select the Product Involved"
+                value={selectedProduct}
+                options={productOptions}
+                onchange={handleInputChange}
+                data-id="selectedProduct"
+                class="form-field">
+            </lightning-combobox>
+        </div>
+    </template>
+
+    <!-- Section 4: Complaint Description -->
+    <div class="section">
+        <h3 class="section-title">✍️ Issue Description</h3>
+        <lightning-textarea
+            label="Describe the Issue"
+            placeholder="Please provide as much detail as possible"
+            data-id="description"     
+            value={description}
+            onchange={handleInputChange}
+            class="form-field large-textarea">
+        </lightning-textarea>
+    </div>
+
+     <div class="form-section">
+        <h3 class="section-title">📎 Receipt Attachment</h3>
+          <lightning-file-upload
+        label="Upload Receipt"
+        name="fileUploader"
+        accept=".pdf,.jpg,.jpeg,.png"
+        record-id={contactId}
+        onuploadfinished={handleUploadFinished}
+    ></lightning-file-upload>
+    </div>
+
+    <!-- Section 5: Submit Complaint -->
+    <div class="section submit-button">
+        
+        <lightning-button
+            variant="brand"
+            label="Submit Complaint"
+            onclick={handleSubmitComplaint}>
+        </lightning-button>
+    </div>
+</template>
 
                 <!-- Reimbursement Form -->
                 <template if:true={isReimbursementSelected}>
-                    <div class="section">
-                        <lightning-input 
-                            label="Title" 
-                            value={title} 
-                            onchange={handleInputChange} 
-                            data-id="title"
-                            class="form-field">
-                        </lightning-input>
+                    <div style="font-size: 1.3rem; font-weight: bold; background: linear-gradient(90deg, #325166, #325166); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: transparent; line-height: 1.5; margin-bottom: 0.75rem;">
+                        💸 Needing a reimbursement?
                     </div>
 
-                    <div class="section">
-                        <lightning-combobox
-                            label="Product"
-                            value={selectedProduct}
-                            options={productOptions}
-                            onchange={handleInputChange}
-                            data-id="selectedProduct"
-                            class="form-field">
-                        </lightning-combobox>
+                    <div style="font-size: 1rem; font-weight: 600; color: #4a4a4a; text-align: left; margin-top: -0.5rem; margin-bottom: 1rem; letter-spacing: 0.5px; font-style: italic; animation: fadeInSlide 0.6s ease-in-out;">
+                        Getting a reimbursement has never been more simple. Just fill out this form.
                     </div>
 
-                    <div class="section">
-                        <lightning-input 
-                            type="number" 
-                            label="Amount Requested" 
-                            value={amountRequested} 
-                            onchange={handleInputChange} 
-                            data-id="amountRequested"
-                            class="form-field">
-                        </lightning-input>
-                    </div>
+                    <template if:true={hasPreviousRequests}>
+            <p class="slds-text-color_success slds-p-around_x-small">
+                ✅ You already have reimbursement requests submitted.
+            </p>
+        </template>
 
-                    <div class="section">
-                        <lightning-textarea 
-                            label="Description" 
-                            value={description} 
-                            onchange={handleInputChange} 
-                            data-id="description"
-                            class="form-field large-textarea"
-                            placeholder="Describe precisely your problem and why you need a reimbursement">
-                        </lightning-textarea>
-                    </div>
-
-                    <div class="section">
-                        <lightning-combobox
-                            label="Reimbursement Method"
-                            value={paymentMethod}
-                            options={paymentMethodOptions}
-                            onchange={handleInputChange}
-                            data-id="paymentMethod"
-                            class="form-field">
-                        </lightning-combobox>
-                    </div>
-
-                    <div class="section">
-                        <lightning-input
-                            type="checkbox"
-                            label="Receipt Attached"
-                            checked={receiptAttached}
-                            onchange={handleInputChange}
-                            data-id="receiptAttached"
-                            class="form-field">
-                        </lightning-input>
-                    </div>
+        <template if:false={hasPreviousRequests}>
+            <p class="slds-text-color_weak slds-p-around_x-small">
+                ℹ️ You haven’t submitted any reimbursement requests yet.
+            </p>
+        </template>
                     
+
+    <!-- Section 1: Title -->
+    <div class="form-section">
+        <h3 class="section-title">📄 Reimbursement Title</h3>
+        <lightning-input 
+            label="Reimbursement Title" 
+            placeholder="E.g. Refund for Doctor Visit"
+            value={title} 
+            onchange={handleInputChange} 
+            data-id="title"
+            class="form-field">
+        </lightning-input>
+    </div>
+
+    <!-- Section 2: Reimbursement Details -->
+    <div class="form-section">
+        <h3 class="section-title">📝 Reimbursement Details</h3>
+        
+        <lightning-combobox
+            label="Product or Service Related"
+            value={selectedProduct}
+            options={productOptions}
+            onchange={handleInputChange}
+            data-id="selectedProduct"
+            class="form-field">
+        </lightning-combobox>
+
+        <lightning-textarea 
+            label="Reason for Reimbursement" 
+            placeholder="Explain the circumstances requiring reimbursement"
+            value={description} 
+            onchange={handleInputChange} 
+            data-id="description"
+            class="form-field large-textarea">
+        </lightning-textarea>
+    </div>
+
+    <!-- Section 3: Payment Information -->
+    <div class="form-section">
+        <h3 class="section-title">💳 Payment Information</h3>
+
+        <lightning-input 
+            type="number" 
+            label="Requested Amount (€)" 
+            placeholder="Enter amount to be reimbursed"
+            value={amountRequested} 
+            required
+            message-when-value-missing="Amount is required"
+            onchange={handleInputChange} 
+            data-id="amountRequested"
+            class="form-field">
+        </lightning-input>
+
+        <lightning-combobox
+            label="Preferred Payment Method"
+            value={paymentMethod}
+            options={paymentMethodOptions}
+            onchange={handleInputChange}
+            data-id="paymentMethod"
+            class="form-field">
+        </lightning-combobox>
+    </div>
+
+    <!-- Section 4: Receipt -->
+    <div class="form-section">
+        <h3 class="section-title">📎 Receipt Attachment</h3>
+
+        <lightning-input
+            type="checkbox"
+            label="I have attached the receipt"
+            checked={receiptAttached}
+            onchange={handleCheckboxChange}
+            data-id="receiptAttached"
+            class="form-field">
+        </lightning-input>
+
+<template if:true={showUpload}>
+    <lightning-file-upload
+        label="Upload Receipt"
+        name="fileUploader"
+        accept=".pdf,.jpg,.jpeg,.png"
+        record-id={contactId}
+        onuploadfinished={handleUploadFinished}
+    ></lightning-file-upload>
+</template>
+
+
+
+    </div>
 
                     <div class="section submit-button">
                         <lightning-button 
-                            label="Submit Reimbursement" 
+                            label="Submit Reimbursement Request" 
                             variant="brand" 
                             onclick={handleSubmitReimbursement}>
                         </lightning-button>

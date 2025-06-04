@@ -1,0 +1,150 @@
+.card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: #f4f6f9;
+}
+
+.card {
+    display: flex;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 2px solid gold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.card-left {
+    flex: 1;
+    max-width: 20%;
+    background-color: #fef6e4;
+    padding: 0.5rem;
+}
+
+.card-left img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.card-right {
+    flex: 3;
+    padding: 1.5rem;
+    color: #333;
+}
+
+.card-right h2 {
+    font-size: 1.7rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    border-bottom: 2px solid #dcdde1;
+    padding-bottom: 0.5rem;
+}
+
+lightning-formatted-rich-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.title-container {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.gradient-text {
+    background: linear-gradient(to right, #325166, gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.arrow-container {
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem 0; /* tighter space above/below arrows */
+}
+
+.down-arrow {
+    font-size: 2rem;
+    color: #325166;
+    animation: bounce 1.2s infinite;
+}
+
+/* Animation for arrow */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(6px);
+    }
+}
+
+.thick-arrow .down-arrow {
+    font-size: 36px;
+    font-weight: bold;
+    color: #325166;
+    line-height: 1;
+}
+
+.thick-arrow {
+    margin-bottom: 4px; /* was 8px — now tighter spacing */
+}
+
+.final-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem; /* was 2rem — now much closer to arrow */
+    padding: 1.5rem 1.2rem;
+    background: linear-gradient(135deg, #99cade, #fffbe6);
+    border-radius: 12px;
+    border: 2px solid gold;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.cta-content {
+    text-align: center;
+    max-width: 420px;
+}
+
+.cta-message {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+.cta-button {
+    background: gold;
+    color: #2c3e50;
+    border: none;
+    padding: 0.7rem 2rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button:hover {
+    background: #e6b800;
+    transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -27,7 +27,7 @@
 }
 
 .circle:hover {
-    background-color: #0070d2; /* Couleur du cercle au survol */
+    background-color: #99cade; /* Couleur du cercle au survol */
     transform: scale(1.1); /* Augmenter légèrement la taille du cercle au survol */
 }
 

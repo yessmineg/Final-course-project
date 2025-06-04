@@ -1,0 +1,54 @@
+<template>
+    <lightning-card>
+        <div slot="title">
+            <h2 class="custom-title">Need Help with Your Health Insurance?</h2>
+        </div>
+
+        <div class="slds-p-horizontal_medium slds-p-vertical_small slds-text-align_left">
+            <lightning-combobox
+                name="issueType"
+                label="What issue are you experiencing?"
+                value={issueType}
+                placeholder="Select an issue"
+                options={issueTypeOptions}
+                onchange={handleIssueTypeChange}>
+            </lightning-combobox>
+
+            <template if:true={showAdditionalQuestions}>
+                <lightning-combobox
+                    name="policyActive"
+                    label="Was your insurance policy active at the time?"
+                    value={policyActive}
+                    placeholder="Yes or No"
+                    options={yesNoOptions}
+                    onchange={handlePolicyStatusChange}>
+                </lightning-combobox>
+
+                <lightning-combobox
+                    name="serviceReceived"
+                    label="Did you receive the medical service?"
+                    value={serviceReceived}
+                    placeholder="Yes or No"
+                    options={yesNoOptions}
+                    onchange={handleServiceReceivedChange}>
+                </lightning-combobox>
+
+                <div class="slds-m-top_medium">
+                    <lightning-button
+                        label="Get Recommendation"
+                        variant="brand"
+                        onclick={handleDecision}>
+                    </lightning-button>
+                </div>
+            </template>
+
+            <template if:true={recommendation}>
+                <div class="slds-box slds-box_xx-small slds-theme_alert-texture slds-m-top_medium slds-theme_info">
+                    <p class="slds-text-heading_small slds-text-color_inverse">
+                        🧭 {recommendation}
+                    </p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
