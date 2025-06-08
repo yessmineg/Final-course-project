@@ -57,26 +57,55 @@
     margin-bottom: 1.25rem;
 }
 
-/* Enhanced Submit button */
+/* Container styling */
 .submit-button {
     display: flex;
     justify-content: flex-end;
     margin-top: 1.5rem;
 }
 
-.submit-button lightning-button {
-    min-width: 180px;
-    font-weight: 700;
-    background-color: #2477cc; /* Button color */
+/* Custom button base style */
+.custom-button {
+    background-color: #2477cc;
+    border: none;
     border-radius: 12px;
     color: white;
+    font-weight: 700;
     padding: 0.8rem 1.6rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    transition: width 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
 }
 
-.submit-button lightning-button:hover {
-    background-color: #264e52; /* Darker shade for hover */
+/* Content inside button */
+.button-content {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    transition: padding-right 0.3s ease;
+}
+
+/* Emoji hidden by default */
+.hover-emoji {
+    opacity: 0;
+    width: 0;
+    margin-left: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, width 0.3s ease, margin-left 0.3s ease;
+}
+
+/* On hover: reveal emoji */
+.custom-button:hover .hover-emoji {
+    opacity: 1;
+    width: 1.5rem;
+    margin-left: 0.5rem;
+}
+
+/* Optional hover effect */
+.custom-button:hover {
     transform: translateY(-2px);
 }
 
@@ -124,4 +153,9 @@
     margin-bottom: 1rem;
     border-left: 4px solid #1976d2;
     padding-left: 0.75rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }

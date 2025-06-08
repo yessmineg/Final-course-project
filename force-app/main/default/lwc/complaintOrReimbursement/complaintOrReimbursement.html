@@ -33,13 +33,17 @@
                     onchange={handleServiceReceivedChange}>
                 </lightning-combobox>
 
-                <div class="slds-m-top_medium">
-                    <lightning-button
-                        label="Get Recommendation"
-                        variant="brand"
-                        onclick={handleDecision}>
-                    </lightning-button>
-                </div>
+               <div class="button-container">
+    <button class="custom-recommendation-button" onclick={handleDecision}>
+        <span class="button-content">
+            Get Recommendation
+            <span class="hover-emoji">💬</span>
+        </span>
+    </button>
+</div>
+
+
+                
             </template>
 
             <template if:true={recommendation}>

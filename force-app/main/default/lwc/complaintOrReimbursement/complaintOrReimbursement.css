@@ -21,9 +21,58 @@ lightning-combobox {
     margin-bottom: 1rem;
 }
 
-lightning-button {
+.custom-recommendation-button {
+    background: linear-gradient(90deg, #0176d3, #3ba6ff);
+    border: none;
+    border-radius: 12px;
+    color: white;
     font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
 }
+
+.custom-recommendation-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* Inner content wrapper */
+.button-content {
+    display: inline-flex;
+    align-items: center;
+    transition: padding-right 0.3s ease;
+    white-space: nowrap;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem; /* optional spacing */
+}
+
+/* Emoji is hidden initially */
+.hover-emoji {
+    opacity: 0;
+    width: 0;
+    margin-left: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, width 0.3s ease, margin-left 0.3s ease;
+    font-size: 1.1rem;
+}
+
+/* Show emoji on hover */
+.custom-recommendation-button:hover .hover-emoji {
+    opacity: 1;
+    width: 1.5rem;
+    margin-left: 0.5rem;
+}
+
 
 .slds-box {
     background-color: #eef6fb;
@@ -43,3 +92,7 @@ lightning-button {
     color: #000000; /* Ensure paragraph text is also black */
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}

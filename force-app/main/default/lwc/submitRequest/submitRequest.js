@@ -12,6 +12,7 @@ export default class SubmitRequestForm extends LightningElement {
     @track amountRequested = null;
     @track paymentMethod = '';
     @track receiptAttached = false;
+    @track date_of_usage = '';
     @track title = '';
     @track selectedProduct = '';
 
@@ -84,6 +85,7 @@ export default class SubmitRequestForm extends LightningElement {
         this.receiptAttached = false;
         this.title = '';
         this.selectedProduct = '';
+        this.date_of_usage = '';
     }
 async handleSubmitComplaint() {
     try {
@@ -126,6 +128,7 @@ async handleSubmitReimbursement() {
         const result = await submitReimbursement({
             amountRequested: this.amountRequested,
             description: this.description,
+            date_of_usage: this.date_of_usage,
             paymentMethod: this.paymentMethod,
             receiptAttached: this.receiptAttached,
             title: this.title,

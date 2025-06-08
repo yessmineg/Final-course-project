@@ -103,6 +103,7 @@
 }
 
 /* Button Group */
+/* Button Group */
 .opp-button-group {
     display: flex;
     justify-content: center;
@@ -117,6 +118,10 @@
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
 }
 
 .btn-accept {
@@ -132,6 +137,26 @@
 .btn-action:hover {
     opacity: 0.9;
 }
+
+/* Emoji hidden by default */
+.emoji-accept,
+.emoji-reject {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.8);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Show emoji with animation on hover */
+.btn-accept:hover .emoji-accept {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.btn-reject:hover .emoji-reject {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
 
 /* Animations */
 @keyframes animateText {

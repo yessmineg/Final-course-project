@@ -92,12 +92,13 @@
     <!-- Section 5: Submit Complaint -->
     <div class="section submit-button">
         
-        <lightning-button
-            variant="brand"
-            label="Submit Complaint"
-            onclick={handleSubmitComplaint}>
-        </lightning-button>
-    </div>
+           <button class="custom-button" onclick={handleSubmitComplaint}>
+        <span class="button-content">
+            Submit Complaint
+            <span class="hover-emoji">✅</span>
+        </span>
+    </button>
+</div>
 </template>
 
                 <!-- Reimbursement Form -->
@@ -108,20 +109,7 @@
 
                     <div style="font-size: 1rem; font-weight: 600; color: #4a4a4a; text-align: left; margin-top: -0.5rem; margin-bottom: 1rem; letter-spacing: 0.5px; font-style: italic; animation: fadeInSlide 0.6s ease-in-out;">
                         Getting a reimbursement has never been more simple. Just fill out this form.
-                    </div>
-
-                    <template if:true={hasPreviousRequests}>
-            <p class="slds-text-color_success slds-p-around_x-small">
-                ✅ You already have reimbursement requests submitted.
-            </p>
-        </template>
-
-        <template if:false={hasPreviousRequests}>
-            <p class="slds-text-color_weak slds-p-around_x-small">
-                ℹ️ You haven’t submitted any reimbursement requests yet.
-            </p>
-        </template>
-                    
+                    </div>                
 
     <!-- Section 1: Title -->
     <div class="form-section">
@@ -148,6 +136,16 @@
             data-id="selectedProduct"
             class="form-field">
         </lightning-combobox>
+
+          <!-- Date of Usage -->
+        <lightning-input 
+            type="date"
+            label="Date of Usage"
+            value={date_of_usage}
+            onchange={handleInputChange}
+            data-id="date_of_usage"
+            class="form-field">
+        </lightning-input>
 
         <lightning-textarea 
             label="Reason for Reimbursement" 
@@ -191,7 +189,7 @@
 
         <lightning-input
             type="checkbox"
-            label="I have attached the receipt"
+            label="I have a receipt to attach"
             checked={receiptAttached}
             onchange={handleCheckboxChange}
             data-id="receiptAttached"
@@ -212,13 +210,15 @@
 
     </div>
 
-                    <div class="section submit-button">
-                        <lightning-button 
-                            label="Submit Reimbursement Request" 
-                            variant="brand" 
-                            onclick={handleSubmitReimbursement}>
-                        </lightning-button>
-                    </div>
+<div class="section submit-button">  
+    <button class="custom-button" onclick={handleSubmitReimbursement}>
+        <span class="button-content">
+            Submit Reimbursement Request
+            <span class="hover-emoji">✅</span>
+        </span>
+    </button>
+</div>
+
                 </template>
             </div>
         </div>

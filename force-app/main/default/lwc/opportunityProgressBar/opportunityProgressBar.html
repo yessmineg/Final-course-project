@@ -86,8 +86,16 @@
             <div class="opp-proposal-actions animate-fade-in">
                 <p class="quote-info">💬 You received a price quote for <strong>{productCode}</strong>.</p>
                 <div class="opp-button-group">
-                    <button class="btn-action btn-accept" onclick={handleAccept}>✅ I Accept the Offer</button>
-                    <button class="btn-action btn-reject" onclick={handleReject}>❌ I Reject the Offer</button>
+                   <button class="btn-action btn-accept" onclick={handleAccept}>
+  <span class="btn-text">I Accept the Offer</span>
+  <span class="emoji-accept">  ✅</span>
+</button>
+
+<button class="btn-action btn-reject" onclick={handleReject}>
+  <span class="btn-text">I Reject the Offer</span>
+  <span class="emoji-reject">  ❌</span>
+</button>
+
                 </div>
             </div>
         </template>

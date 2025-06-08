@@ -186,20 +186,33 @@
     color: #ffffff; /* Change la couleur du texte du titre au survol */
     background-color: #2980b9; /* Change la couleur de fond du titre au survol */
 }
-/* Button for "Read More" */
 .blog-card-button {
-    background-color: #325166; /* Dark blue background */
-    color: white; /* White text */
+    background-color: #325166;
+    color: white;
     padding: 12px 20px;
     border: none;
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative; /* Required for pseudo-element positioning */
 }
 
-/* Hover effect for the button */
+/* Add pseudo-element for the emoji, initially hidden */
+.blog-card-button::after {
+    content: " 📦"; /* Space before emoji */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Hover effects */
 .blog-card-button:hover {
-    background-color: #99cade; /* Light blue on hover */
+    background-color: #4a6f7e;
     transform: scale(1.05);
 }
+
+/* Show emoji on hover */
+.blog-card-button:hover::after {
+    opacity: 1;
+}
+

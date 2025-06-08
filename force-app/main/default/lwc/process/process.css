@@ -130,19 +130,36 @@ lightning-formatted-rich-text {
     background: gold;
     color: #2c3e50;
     border: none;
-    padding: 0.7rem 2rem;
+    padding: 0.7rem 4rem;
     font-size: 1rem;
-    border-radius: 10px;
+    border-radius: 50px;
     font-weight: bold;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.cart-emoji {
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Show emoji on hover */
+.cta-button:hover .cart-emoji {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .cta-button:hover {
     background: #e6b800;
     transform: scale(1.05);
 }
+
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(30px); }

@@ -104,23 +104,49 @@
 /* ===========================
    Buttons
    =========================== */
-   .lightning-button {
-    padding: 1rem 2rem; /* Increased padding for a larger button */
-    font-size: 18px; /* Larger font size */
-    border-radius: 8px; /* Slightly larger border radius */
+.lightning-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #0070d2;
+    color: white;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin-left: 12px;
 }
 
-.lightning-button:hover {
+/* Button scales slightly and expands on hover */
+.brand-button:hover {
     background-color: #2b4d6c;
-    transform: scale(1.1); /* Increased scaling on hover for a larger effect */
+    transform: scale(1.1);
+    padding-right: 1.6rem; /* extra room for emoji */
 }
 
-.lightning-button-icon {
-    padding: 1rem 2rem; /* Increased padding for the button with icon */
+/* Emoji hidden by default: no width */
+.btn-emoji {
+    width: 0;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.8);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
+/* Emoji expands on hover */
+.brand-button:hover .btn-emoji {
+    width: auto;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    margin-left: 0.4rem;
+}
+
+/* Disabled styling */
 .lightning-button:disabled {
     background-color: #d8dde6;
     color: #f4f6f9;

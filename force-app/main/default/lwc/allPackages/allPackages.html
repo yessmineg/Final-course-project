@@ -72,7 +72,6 @@
             <div class="slds-modal__container">
                 <header class="slds-modal__header">
                     <h2 class="slds-text-heading_medium">Register Your Interest</h2>
-                    <lightning-button-icon icon-name="utility:close" variant="bare-inverse" class="slds-modal__close" onclick={closeModal}></lightning-button-icon>
                 </header>
     
                 <div class="slds-modal__content slds-p-around_medium">
@@ -147,7 +146,11 @@
     
                 <footer class="slds-modal__footer">
                     <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
-                    <lightning-button label="Submit" variant="brand" onclick={handleSubmit}></lightning-button>
+                    <button class="lightning-button brand-button" onclick={handleSubmit}>
+  <span class="btn-label">Submit</span>
+  <span class="btn-emoji">✅</span>
+</button>
+
                 </footer>
             </div>
         </section>
