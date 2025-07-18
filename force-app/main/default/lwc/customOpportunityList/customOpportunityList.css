@@ -1,0 +1,114 @@
+/* Main card padding and visual frame */
+.slds-m-around_medium {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid #d8dde6;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+/* Input fields */
+lightning-input,
+lightning-combobox {
+    width: 100%;
+}
+
+/* Buttons alignment and spacing */
+lightning-layout-item.slds-align_absolute-center {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding-top: 1rem;
+}
+
+/* Button hover animations */
+lightning-button:hover {
+    transform: scale(1.03);
+    transition: transform 0.2s ease;
+}
+
+/* Modal styling */
+.slds-modal__header {
+    background-color: #f3f6f9;
+    border-bottom: 1px solid #d8dde6;
+    padding: 1rem;
+}
+.slds-modal__content {
+    padding: 1rem;
+}
+.slds-modal__footer {
+    background-color: #f3f6f9;
+    border-top: 1px solid #d8dde6;
+    padding: 1rem;
+    text-align: right;
+}
+
+/* Custom stage highlight colors */
+.stage-prospecting {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+.stage-qualification {
+    background-color: #f1f8e9;
+    color: #33691e;
+}
+.stage-needsanalysis {
+    background-color: #fff8e1;
+    color: #ef6c00;
+}
+.stage-valueproposition {
+    background-color: #fce4ec;
+    color: #c2185b;
+}
+.stage-negotiationreview {
+    background-color: #fff3e0;
+    color: #f57c00;
+}
+.stage-closedwon {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+.stage-closedlost {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* RESPONSIVE LAYOUT BELOW */
+
+@media only screen and (max-width: 1024px) {
+    lightning-layout {
+        flex-direction: column !important;
+    }
+    lightning-layout-item {
+        width: 100% !important;
+        margin-bottom: 1rem;
+    }
+    lightning-layout-item.slds-align_absolute-center {
+        justify-content: flex-start;
+    }
+}
+
+/* Improve datatable cell padding */
+lightning-datatable .slds-cell-edit {
+    padding: 0.5rem 1rem;
+}
+
+/* Smooth modal transition */
+.slds-modal__container {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border-radius: 0.5rem;
+}
+
+/* Prevent overflow */
+lightning-datatable {
+    overflow-x: auto;
+}
+.green-stage {
+    color: green;
+    font-weight: bold;
+}
+.red-stage {
+    color: red;
+    font-weight: bold;
+}

@@ -1,0 +1,15 @@
+.tip-container {
+    background-color: #f4f6f9;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin: 1rem;
+    text-align: center;
+}
+
+.tip-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    line-height: 1.6;
+}

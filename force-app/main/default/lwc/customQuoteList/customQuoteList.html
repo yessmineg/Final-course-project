@@ -1,0 +1,65 @@
+<template>
+    <lightning-card title="📄 Quote List" icon-name="standard:quote">
+        <div class="slds-m-around_medium">
+            <lightning-layout>
+                <lightning-layout-item class="slds-size_1-of-3">
+                    <lightning-input
+                        type="search"
+                        label="Search"
+                        placeholder="Search Quotes"
+                        value={searchKey}
+                        onchange={handleSearch}>
+                    </lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item class="slds-size_1-of-3 slds-p-left_small">
+                    <lightning-combobox
+                        label="Status Filter"
+                        value={selectedStatus}
+                        options={statusOptions}
+                        placeholder="All Statuses"
+                        onchange={handleStatusChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+                <lightning-layout-item class="slds-size_1-of-3 slds-align_absolute-center">
+                    <lightning-button label="📰 New" variant="brand" onclick={handleNewQuote}></lightning-button>
+                    <lightning-button icon-name="utility:refresh" label="Refresh" class="slds-m-left_small" onclick={refreshList}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+
+        <template if:true={filteredQuotes}>
+            <lightning-datatable
+                key-field="Id"
+                data={filteredQuotes}
+                columns={columns}
+                onrowaction={handleRowAction}
+                hide-checkbox-column
+                show-row-number-column>
+            </lightning-datatable>
+        </template>
+
+        <template if:true={error}>
+            <p class="slds-text-color_error slds-p-around_medium">❌ {error}</p>
+        </template>
+    </lightning-card>
+
+    <template if:true={showDeleteModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-modal__title">Confirm Deletion</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    Are you sure you want to delete <strong>{selectedRecord.Name}</strong>?
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" label="❌ Cancel" onclick={closeDeleteModal}></lightning-button>
+                    <lightning-button variant="destructive" label="🗑 Delete" onclick={confirmDelete}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

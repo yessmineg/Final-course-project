@@ -1,0 +1,53 @@
+<template>
+    <lightning-card title="🕵️ Analyse de Fraude" >
+        <div class="slds-p-around_medium slds-align_absolute-center">
+    <lightning-button 
+        class="verify-button"
+        variant="brand" 
+        label="Vérifier"
+        title="Lancer l'analyse"
+        icon-name="utility:search"
+        icon-position="left"
+        onclick={handleClick}>
+    </lightning-button>
+</div>
+        <template if:true={diagnostic}>
+            <div class="diagnostic-container">
+                <p>
+                    <strong>Result :</strong> {diagnostic}
+                </p>
+
+                <div class="score-container">
+                    <p><strong>Fraud score :</strong> {score}%</p>
+
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar-background">
+                            <!-- progressBarClass = "width-XX low|medium|high" -->
+                            <div class="progress-bar-fill {progressBarClass}"></div>
+                        </div>
+                        <div class="progress-bar-label">
+                            <span class="label-low">✅ Seems Legit</span>
+                            <span class="label-medium">⚠️ Suspicious</span>
+                            <span class="label-high">❌ Fraud</span>
+                        </div>
+                    </div>
+                </div>
+
+                <template if:true={explanations}>
+                    <div class="explanations-container slds-m-top_medium">
+                        <p><strong>Reasons (if found) </strong></p>
+                        <ul class="slds-list_dotted">
+                            <template for:each={explanations} for:item="line">
+                                <li key={line}>{line}</li>
+                            </template>
+                        </ul>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <template if:true={error}>
+            <div class="slds-text-color_error slds-p-around_medium">{error}</div>
+        </template>
+    </lightning-card>
+</template>

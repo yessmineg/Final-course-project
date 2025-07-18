@@ -1,0 +1,13 @@
+/* Ratings colors */
+.rating-hot {
+    background-color: #ffebee;
+    color: #b71c1c;
+}
+.rating-warm {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+.rating-cold {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+}

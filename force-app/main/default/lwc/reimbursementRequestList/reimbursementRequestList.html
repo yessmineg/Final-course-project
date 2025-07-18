@@ -1,0 +1,72 @@
+<template>
+    <lightning-card title="📋 Reimbursement Requests" icon-name="standard:expense">
+        <div class="slds-m-around_medium">
+            <lightning-layout>
+                <!-- Search -->
+                <lightning-layout-item class="slds-size_1-of-3">
+                    <lightning-input
+                        type="search"
+                        placeholder="Search Reimbursement Requests"
+                        label="Search"
+                        value={searchKey}
+                        onchange={handleSearch}>
+                    </lightning-input>
+                </lightning-layout-item>
+
+                <!-- Status Filter -->
+                <lightning-layout-item class="slds-size_1-of-3 slds-p-left_small">
+                    <lightning-combobox
+                        name="statusFilter"
+                        label="Status Filter"
+                        value={selectedStatus}
+                        placeholder="All Statuses"
+                        options={statusOptions}
+                        onchange={handleStatusChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+                <!-- Actions -->
+                <lightning-layout-item class="slds-size_1-of-3 slds-align_absolute-center">
+                    <lightning-button label="📰 New" variant="brand" onclick={handleNewRequest}></lightning-button>
+                    <lightning-button icon-name="utility:refresh" label="Refresh" class="slds-m-left_small" onclick={refreshList}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+
+        <!-- Data Table -->
+        <template if:true={filteredReimbursements}>
+            <lightning-datatable
+                key-field="Id"
+                data={filteredReimbursements}
+                columns={columns}
+                onrowaction={handleRowAction}
+                hide-checkbox-column
+                show-row-number-column>
+            </lightning-datatable>
+        </template>
+
+        <!-- Error -->
+        <template if:true={error}>
+            <p class="slds-text-color_error slds-p-around_medium">❌ {error}</p>
+        </template>
+    </lightning-card>
+
+    <!-- Confirmation Modal -->
+    <template if:true={showDeleteModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-modal__title">Confirm Deletion</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    Are you sure you want to delete <strong>{selectedRecord.Name}</strong>?
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" label="❌ Cancel" onclick={closeDeleteModal}></lightning-button>
+                    <lightning-button variant="destructive" label="🗑 Delete" onclick={confirmDelete}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
