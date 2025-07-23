@@ -153,4 +153,8 @@ export default class OpportunityProgressPath extends LightningElement {
             variant: 'error',
         }));
     }
+    get isNegotiationStage() {
+    return this.opportunity?.StageName === 'Negotiation/Review';
+}
+
 }

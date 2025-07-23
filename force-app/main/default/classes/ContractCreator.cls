@@ -1,45 +1,49 @@
 public class ContractCreator {
     public static void createContractsForNegotiationOpportunities(List<Opportunity> newOpps, Map<Id, Opportunity> oldOppMap) {
-        // Map AccountId -> liste d'opportunités à traiter (pour éviter doublons)
         Set<Id> accountIdsToProcess = new Set<Id>();
+        Map<Id, Opportunity> accountToOppMap = new Map<Id, Opportunity>();
 
         for (Opportunity opp : newOpps) {
             Opportunity oldOpp = oldOppMap.get(opp.Id);
-            if (oldOpp.StageName != 'Negotiation/Review' && opp.StageName == 'Negotiation/Review' && opp.AccountId != null) {
+            if (oldOpp.StageName != 'Negotiation/Review'
+                && opp.StageName == 'Negotiation/Review'
+                && opp.AccountId != null) {
+                    
                 accountIdsToProcess.add(opp.AccountId);
+                accountToOppMap.put(opp.AccountId, opp);
             }
         }
 
-        if (accountIdsToProcess.isEmpty()) {
-            return; // rien à faire
-        }
+        if (accountIdsToProcess.isEmpty()) return;
 
-        // Récupérer les contrats existants pour ces AccountIds
+        // Supprimer les anciens contrats
         List<Contract> existingContracts = [
-            SELECT Id, AccountId 
-            FROM Contract 
-            WHERE AccountId IN :accountIdsToProcess
+            SELECT Id FROM Contract WHERE AccountId IN :accountIdsToProcess
         ];
 
-        // Supprimer les contrats existants
         if (!existingContracts.isEmpty()) {
             try {
                 delete existingContracts;
             } catch (Exception e) {
                 System.debug('Erreur lors de la suppression des anciens contrats : ' + e.getMessage());
-                // Optionnel : gestion d'erreur plus fine ici
             }
         }
 
-        // Créer un contrat par AccountId
+        // Créer les nouveaux contrats
         List<Contract> contractsToInsert = new List<Contract>();
         for (Id accId : accountIdsToProcess) {
-            Contract c = new Contract();
-            c.AccountId = accId;
-            c.StartDate = Date.today();
-            c.Status = 'Draft'; // adapter selon ta config
-            c.Description = 'Contrat automatique - dernière version pour Account ' + accId;
-            // Ajouter d'autres champs obligatoires si besoin
+           Contract c = new Contract();
+c.AccountId = accId;
+c.StartDate = Date.today();
+c.ContractTerm = 1; // durée en mois
+c.Status = 'Draft';
+c.Description = 'Contrat automatique - dernière version pour Account ' + accId;
+
+            Opportunity relatedOpp = accountToOppMap.get(accId);
+            if (relatedOpp != null) {
+                c.Opportunity__c = relatedOpp.Id; // liaison personnalisée
+            }
+
             contractsToInsert.add(c);
         }
 
@@ -48,7 +52,6 @@ public class ContractCreator {
                 insert contractsToInsert;
             } catch (Exception e) {
                 System.debug('Erreur lors de la création des nouveaux contrats : ' + e.getMessage());
-                // Gestion d'erreur si besoin
             }
         }
     }

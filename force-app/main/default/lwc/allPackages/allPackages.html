@@ -43,20 +43,32 @@
                         </div>
 
                         <!-- DETAILS SECTION -->
-                        <template if:true={pkg.showDetails}>
-                            <div class="details slds-m-top_small slds-grid slds-grid_vertical slds-gutters_small">
-                                <p class="slds-text-title"><strong>Coverage:</strong> {pkg.coverageLimit}</p>
-                                <p class="slds-text-title"><strong>Deductible:</strong> {pkg.deductible}</p>
-                                <p class="slds-text-title"><strong>Reimbursement Rate:</strong> {pkg.reimbursementRate}%</p>
-                                <p class="slds-text-title"><strong>Duration:</strong> {pkg.contractDuration}</p>
-                                <p class="slds-text-title"><strong>Discounts:</strong> {pkg.discounts}</p>
-                                <p class="slds-text-title" ><strong>Minimum age:</strong> {pkg.minimumAge}</p>
-                                <p class="slds-text-title"><strong>Maximum age:</strong> {pkg.maximumAge}</p>
-                                <p class="slds-text-title"><strong>Exclusions:</strong> {pkg.exclusions}</p>
-                                <p class="slds-text-title"><strong>Renewal Conditions:</strong> {pkg.renewalConditions}</p>
-                            </div>
-                            <lightning-button label="I'm Interested" variant="brand" data-id={pkg.productCode} onclick={openModal}></lightning-button>
-                        </template>
+                      <!-- DETAILS SECTION -->
+<template if:true={pkg.showDetails}>
+    <div class="slds-grid slds-p-top_small">
+        <!-- Empty spacer for 1/4 (to match image column) -->
+        <div class="slds-col slds-size_1-of-4"></div>
+
+        <!-- Details in 3/4 right side -->
+        <div class="slds-col slds-size_3-of-4">
+            <div class="details slds-grid slds-grid_vertical slds-gutters_small">
+                <p class="slds-text-title"><strong>Coverage:</strong> {pkg.coverageLimit}</p>
+                <p class="slds-text-title"><strong>Deductible:</strong> {pkg.deductible}</p>
+                <p class="slds-text-title"><strong>Reimbursement Rate:</strong> {pkg.reimbursementRate}%</p>
+                <p class="slds-text-title"><strong>Duration:</strong> {pkg.contractDuration}</p>
+                <p class="slds-text-title"><strong>Discounts:</strong> {pkg.discounts}</p>
+                <p class="slds-text-title"><strong>Minimum age:</strong> {pkg.minimumAge}</p>
+                <p class="slds-text-title"><strong>Maximum age:</strong> {pkg.maximumAge}</p>
+                <p class="slds-text-title"><strong>Exclusions:</strong> {pkg.exclusions}</p>
+                <p class="slds-text-title"><strong>Renewal Conditions:</strong> {pkg.renewalConditions}</p>
+            </div>
+            <div class="slds-m-top_small">
+                <lightning-button label="I'm Interested" variant="brand" data-id={pkg.productCode} onclick={openModal}></lightning-button>
+            </div>
+        </div>
+    </div>
+</template>
+
                     </div>
                 </template>
             </template>
@@ -84,7 +96,7 @@
     
                     <!-- Section: Informations personnelles -->
                     <div class="slds-box slds-m-bottom_medium">
-                        <h3 class="slds-text-title_bold slds-m-bottom_small">Informations personnelles</h3>
+                        <h3 class="slds-text-title_bold slds-m-bottom_small">Personal information</h3>
                         <div class="slds-grid slds-wrap">
                             <div class="slds-col slds-size_1-of-2 slds-p-right_small">
                                 <lightning-input label="Full Name" name="name" value={name} onchange={handleInputChange} required></lightning-input>
@@ -103,7 +115,7 @@
     
                     <!-- Section: Adresse entreprise -->
                     <div class="slds-box slds-m-bottom_medium">
-                        <h3 class="slds-text-title_bold slds-m-bottom_small">Informations sur l’entreprise</h3>
+                        <h3 class="slds-text-title_bold slds-m-bottom_small">The company's information</h3>
                         <div class="slds-grid slds-wrap">
                             <div class="slds-col slds-size_1-of-2 slds-p-right_small">
                                 <lightning-input label="Company Name" name="company" value={company} onchange={handleInputChange}></lightning-input>
@@ -126,7 +138,7 @@
     
                     <!-- Section: Autres informations -->
                     <div class="slds-box slds-m-bottom_medium">
-                        <h3 class="slds-text-title_bold slds-m-bottom_small">Autres informations</h3>
+                        <h3 class="slds-text-title_bold slds-m-bottom_small">Other</h3>
                         <div class="slds-grid slds-wrap">
                             <div class="slds-col slds-size_1-of-2">
                                 <lightning-combobox 

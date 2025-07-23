@@ -99,6 +99,24 @@
                 </div>
             </div>
         </template>
+
+<!-- Negotiation/Review -->
+<template if:true={isNegotiationStage}>
+    <div class="negotiation-card">
+        <div class="negotiation-icon">📄</div>
+        <div class="negotiation-content">
+            <h3 class="negotiation-heading">Contract Sent for Signature</h3>
+            <p class="negotiation-text">
+                Your contract has been successfully sent. Please review the terms and sign it to move forward with the process.
+            </p>
+            <p class="negotiation-note">You will receive a confirmation email after signing.</p>
+        </div>
+    </div>
+</template>
+
+
+
+
     </template>
     <template if:true={isRejectModalOpen}>
         <section>

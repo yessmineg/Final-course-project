@@ -20,17 +20,16 @@ export default class ComplaintList extends NavigationMixin(LightningElement) {
     statusOptions = [
         { label: 'All', value: '' },
         { label: 'New', value: 'New' },
-        { label: 'In Progress', value: 'In Progress' },
-        { label: 'Resolved', value: 'Resolved' },
+        { label: 'Investigating', value: 'Investigating' },
         { label: 'Closed', value: 'Closed' }
     ];
 
     categoryOptions = [
         { label: 'All', value: '' },
-        { label: 'Medical', value: 'Medical' },
-        { label: 'Dental', value: 'Dental' },
-        { label: 'Vision', value: 'Vision' },
-        { label: 'Pharmacy', value: 'Pharmacy' },
+        { label: 'Product Issue', value: 'Product Issue' },
+        { label: 'Service Issue', value: 'Service Issue' },
+        { label: 'Billing Problem', value: 'Billing Problem' },
+        { label: 'incorrect billing', value: 'incorrect billing' },
         { label: 'Other', value: 'Other' }
     ];
 

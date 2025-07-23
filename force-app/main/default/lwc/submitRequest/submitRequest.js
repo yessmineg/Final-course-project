@@ -1,5 +1,5 @@
 import { LightningElement, track, api } from 'lwc';
-import submitComplaint from '@salesforce/apex/ComplaintController.submitComplaint';
+import submitComplaint from '@salesforce/apex/ComplaintRequestController.submitComplaint';
 import submitReimbursement from '@salesforce/apex/ReimbursementRequestController.submitReimbursement';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getContactIdForCurrentUser from '@salesforce/apex/ReimbursementRequestController.getContactIdForCurrentUser';
