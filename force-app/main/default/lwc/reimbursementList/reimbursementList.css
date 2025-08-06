@@ -1,24 +1,86 @@
 .custom-card-body {
-    padding: 1.5rem;
+    padding: 2rem;
     background-color: #f4f6f9;
-    border-radius: 0.75rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
+    max-width: 100%;
 }
 
-/* Enhanced datatable */
+/* Generic Shadow Card */
+.shadow-card {
+    background-color: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation-name: fadeInUp, bounceIn;
+    animation-duration: 0.6s, 0.5s;
+    animation-delay: 0.1s, 0.6s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease, ease-in-out;
+}
+.shadow-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Section */
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.header-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.header-subtitle {
+    font-size: 0.9rem;
+    color: #5f6a7d;
+}
+
+/* Table Styling */
 .custom-datatable {
-    border-radius: 0.5rem;
-    overflow: hidden;
+    border-radius: 0.75rem;
     background-color: #ffffff;
-    border: 1px solid #d8dde6;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    transition: box-shadow 0.3s ease;
+    border: 1px solid #dce1e6;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
 }
 
 .custom-datatable:hover {
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
 }
 
+.slds-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+.slds-table tbody tr:hover {
+    background-color: #f0f8ff;
+}
+
+/* Spinner */
+.center-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+    position: relative;
+    animation: fadeInUp 0.4s ease forwards;
+    opacity: 0;
+}
+.center-spinner::after {
+    content: '';
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #dfe3e8;
+    animation: pulseRing 1.5s ease-out infinite;
+}
+
+/* Error */
 .error-message {
     margin-top: 1.5rem;
     padding: 1rem;
@@ -31,9 +93,100 @@
     font-weight: 500;
     color: #c23934;
     font-size: 0.95rem;
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
 }
 
 .error-icon {
     fill: #c23934;
     flex-shrink: 0;
+}
+
+/* Utility Colors */
+.text-success {
+    color: #2e8540;
+}
+
+.text-warning {
+    color: #ffb75d;
+}
+
+.refresh-btn {
+    margin-left: 1rem;
+    transition: transform 0.3s ease;
+}
+.refresh-btn:hover {
+    transform: rotate(15deg) scale(1.1);
+}
+
+/* Fade-in Animation */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Bounce-in effect for cards */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.95);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Spinner pulse ring */
+@keyframes pulseRing {
+    0% {
+        transform: scale(0.5);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.custom-card-container {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+/* Apply animation to card containers */
+.info-card,
+.warning-card,
+.table-section,
+.error-message {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+/* Delay animations for better flow */
+.info-card {
+    animation-delay: 0.2s;
+}
+.warning-card {
+    animation-delay: 0.4s;
+}
+.table-section {
+    animation-delay: 0.6s;
+}
+
+/* Smooth transition for all elements */
+* {
+    transition: all 0.2s ease-in-out;
 }

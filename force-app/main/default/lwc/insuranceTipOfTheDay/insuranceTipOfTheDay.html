@@ -1,7 +1,20 @@
 <template>
-    <lightning-card title="💡 Astuce du jour" icon-name="utility:lightbulb">
-        <div class="tip-container">
-            <p class="tip-text">{currentTip}</p>
+    <section
+        class="slds-box slds-box_xx-small slds-text-align_center custom-tip-container"
+        aria-live="polite"
+        aria-atomic="true"
+        aria-label="Health insurance tip of the day"
+        role="region"
+        tabindex="0"
+        onmouseenter={handleMouseEnter}
+        onmouseleave={handleMouseLeave}
+    >
+        <h2 class="slds-text-heading_small custom-tip-heading">💡 Tips of the Day</h2>
+        <p class="slds-text-heading_medium custom-tip-text tip-text fade-in">
+            {currentTip}
+        </p>
+        <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
         </div>
-    </lightning-card>
+    </section>
 </template>

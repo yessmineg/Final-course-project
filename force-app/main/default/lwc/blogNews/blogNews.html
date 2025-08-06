@@ -1,5 +1,5 @@
 <template>
-    <lightning-card title="Blog & News" icon-name="utility:news">
+    <div class="custom-card-container">
         <template if:true={articles}>
             <div class="blog-container">
                 <template for:each={articles} for:item="article">
@@ -16,5 +16,5 @@
         <template if:false={articles}>
             <p class="no-articles">No articles available.</p>
         </template>
-    </lightning-card>
+    </div>
 </template>

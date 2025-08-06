@@ -1,5 +1,5 @@
 <template>
-    <lightning-card class="testimonial-card">
+    <div class="custom-card-container">
         <div class="testimonial-card-header">
             <div class="testimonial-header-content">
                 <lightning-icon icon-name="utility:quote" size="small" class="testimonial-icon"></lightning-icon>
@@ -8,27 +8,37 @@
             <p class="testimonial-subtitle">See what our satisfied customers have to say about us!</p>
         </div>
 
-        <template if:true={testimonials}>
-            <div class="testimonial-container">
-                <template for:each={testimonials} for:item="testimonial">
-                    <div key={testimonial.id} class="testimonial">
-                        <div class="testimonial-header">
-                            <lightning-icon icon-name="standard:user" size="large" class="testimonial-avatar"></lightning-icon>
-                            <div>
-                                <strong>{testimonial.author}</strong>
-                                <em>({testimonial.date})</em>
-                            </div>
-                        </div>
-                        <div class="testimonial-content">
-                            "{testimonial.content}"
+        <template if:true={currentTestimonial}>
+            <div class="testimonial-carousel">
+                <div class={animationClass} key={currentTestimonial.id}>
+                    <div class="testimonial-header">
+                        <lightning-icon icon-name="standard:user" size="medium" class="testimonial-avatar"></lightning-icon>
+                        <div>
+                            <strong>{currentTestimonial.author}</strong>
+                            <em>({currentTestimonial.date})</em>
                         </div>
                     </div>
-                </template>
+                    <div class="testimonial-content">
+                        "{currentTestimonial.content}"
+                    </div>
+                </div>
+
+               <div class="carousel-buttons">
+    <button onclick={handlePrev} class="carousel-button prev-button">
+        <span class="arrow">←</span>
+        <span class="btn-text">Prev</span>
+    </button>
+    <button onclick={handleNext} class="carousel-button next-button">
+        <span class="btn-text">Next</span>
+        <span class="arrow">→</span>
+    </button>
+</div>
+
             </div>
         </template>
 
         <template if:false={testimonials}>
             <p class="no-testimonials">No testimonials available.</p>
         </template>
-    </lightning-card>
+    </div>
 </template>

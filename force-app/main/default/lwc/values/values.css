@@ -1,54 +1,59 @@
 .circle-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    justify-content: center;
+    padding: 2rem;
 }
 
-.circle-row {
-    display: flex;
-    justify-content: center;
-    gap: 50px; /* Augmenter l'espacement entre les cercles */
+.circle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    width: 100%;
 }
 
 .circle {
-    text-align: center;
-    background-color: #f4f6f9; /* Couleur de fond initiale */
+    background-color: #f4f6f9;
     border-radius: 50%;
-    padding: 40px; /* Augmenter le padding pour rendre le cercle encore plus grand */
-    width: 180px; /* Augmenter la largeur du cercle */
-    height: 180px; /* Augmenter la hauteur du cercle */
+    padding: 2rem;
+    width: 160px;
+    height: 160px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Augmenter l'ombre pour plus de profondeur */
-    transition: background-color 0.3s, transform 0.3s; /* Ajouter une transition pour la couleur et la transformation */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    outline: none;
 }
 
-.circle:hover {
-    background-color: #99cade; /* Couleur du cercle au survol */
-    transform: scale(1.1); /* Augmenter légèrement la taille du cercle au survol */
+.circle:hover,
+.circle:focus {
+    background-color: #325166;
+    transform: scale(1.05);
 }
 
 .circle-icon {
-    margin-bottom: 15px; /* Augmenter l'espacement entre l'icône et le texte */
-    font-size: 50px; /* Augmenter la taille de l'icône */
-    color: #333; /* Couleur de l'icône par défaut */
-    transition: color 0.3s; /* Transition de la couleur de l'icône */
+    margin-bottom: 10px;
+    color: #333;
+    transition: color 0.3s ease;
 }
 
-.circle:hover .circle-icon {
-    color: white; /* Changer la couleur de l'icône au survol */
+.circle:hover .circle-icon,
+.circle:focus .circle-icon {
+    color: white;
 }
 
 .circle-value {
-    font-size: 18px; /* Augmenter la taille du texte */
+    font-size: 1rem;
     font-weight: 600;
     color: #333;
-    transition: color 0.3s; /* Transition de la couleur du texte */
+    text-align: center;
+    transition: color 0.3s ease;
 }
 
-.circle:hover .circle-value {
-    color: white; /* Changer la couleur du texte au survol */
+.circle:hover .circle-value,
+.circle:focus .circle-value {
+    color: white;
 }

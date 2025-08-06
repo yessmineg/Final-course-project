@@ -1,0 +1,21 @@
+<template>
+    <div class="carousel-wrapper">
+        <h2 class="carousel-title gradient-text">Explore Our Smart Health Coverage</h2>
+
+        <div class="carousel-card">
+            <img src={currentImage.src} alt="GIF Image" class="carousel-image fade-in" />
+        </div>
+
+        <div class="carousel-caption">{currentImage.caption}</div>
+
+        <div class="dots">
+            <template for:each={dotList} for:item="dot">
+                <span key={dot.index}
+                      class={dot.class}
+                      onclick={handleDotClick}
+                      data-index={dot.index}>
+                </span>
+            </template>
+        </div>
+    </div>
+</template>

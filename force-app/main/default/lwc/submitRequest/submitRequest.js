@@ -1,8 +1,8 @@
 import { LightningElement, track, api } from 'lwc';
 import submitComplaint from '@salesforce/apex/ComplaintRequestController.submitComplaint';
 import submitReimbursement from '@salesforce/apex/ReimbursementRequestController.submitReimbursement';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getContactIdForCurrentUser from '@salesforce/apex/ReimbursementRequestController.getContactIdForCurrentUser';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class SubmitRequestForm extends LightningElement {
     @track selectedType = '';
@@ -15,6 +15,21 @@ export default class SubmitRequestForm extends LightningElement {
     @track date_of_usage = '';
     @track title = '';
     @track selectedProduct = '';
+    @track contactId;
+    @api recordId;
+
+    showUpload = false;
+
+    connectedCallback() {
+        getContactIdForCurrentUser()
+            .then(result => {
+                this.contactId = result;
+                console.log('✅ Contact ID loaded:', this.contactId);
+            })
+            .catch(error => {
+                console.error('❌ Failed to get contact ID:', error);
+            });
+    }
 
     get options() {
         return [
@@ -86,89 +101,85 @@ export default class SubmitRequestForm extends LightningElement {
         this.title = '';
         this.selectedProduct = '';
         this.date_of_usage = '';
+        this.showUpload = false;
     }
-async handleSubmitComplaint() {
-    try {
-        console.log('Submitting complaint with:', {
-            category: this.category,
-            name: this.name,
-            description: this.description,
-            product: this.selectedProduct,
-            contactId: this.contactId
-        });
 
-        await submitComplaint({
-            category: this.category,
-            name: this.name,
-            description: this.description,
-            product: this.selectedProduct,
-            contactId: this.contactId
-        });
+    async handleSubmitComplaint() {
+        try {
+            await submitComplaint({
+                category: this.category,
+                name: this.name,
+                description: this.description,
+                product: this.selectedProduct,
+                contactId: this.contactId
+            });
 
-        this.dispatchEvent(new ShowToastEvent({
-            title: 'Success',
-            message: 'Complaint submitted successfully!',
-            variant: 'success'
-        }));
+            this.dispatchEvent(new ShowToastEvent({
+                title: 'Success',
+                message: 'Complaint submitted successfully!',
+                variant: 'success'
+            }));
 
-        this.resetForm();
-    } catch (error) {
-        console.error('Error in handleSubmitComplaint:', error);
-        this.dispatchEvent(new ShowToastEvent({
-            title: 'Error',
-            message: error.body ? error.body.message : error.message,
-            variant: 'error'
-        }));
+            this.resetForm();
+        } catch (error) {
+            console.error('Error in handleSubmitComplaint:', error);
+            this.dispatchEvent(new ShowToastEvent({
+                title: 'Error',
+                message: error.body ? error.body.message : error.message,
+                variant: 'error'
+            }));
+        }
     }
-}
 
-async handleSubmitReimbursement() {
-    try {
-        // Pass the contactId to Apex along with other fields to associate the file
-        const result = await submitReimbursement({
-            amountRequested: this.amountRequested,
-            description: this.description,
-            date_of_usage: this.date_of_usage,
-            paymentMethod: this.paymentMethod,
-            receiptAttached: this.receiptAttached,
-            title: this.title,
-            product: this.selectedProduct,
-            status: 'Submitted',
-            contactId: this.contactId  // Contact ID to link the uploaded file
-        });
+    async handleSubmitReimbursement() {
+        try {
+            const result = await submitReimbursement({
+                amountRequested: this.amountRequested,
+                description: this.description,
+                date_of_usage: this.date_of_usage,
+                paymentMethod: this.paymentMethod,
+                receiptAttached: this.receiptAttached,
+                title: this.title,
+                product: this.selectedProduct,
+                status: 'Submitted',
+                contactId: this.contactId
+            });
 
-        this.dispatchEvent(new ShowToastEvent({
-            title: 'Success',
-            message: 'Reimbursement request submitted successfully!',
-            variant: 'success'
-        }));
+            this.dispatchEvent(new ShowToastEvent({
+                title: 'Success',
+                message: 'Reimbursement request submitted successfully!',
+                variant: 'success'
+            }));
 
-        this.resetForm();
-    } catch (error) {
-        this.dispatchEvent(new ShowToastEvent({
-            title: 'Error',
-            message: error.body ? error.body.message : error.message,
-            variant: 'error'
-        }));
+            this.resetForm();
+        } catch (error) {
+            this.dispatchEvent(new ShowToastEvent({
+                title: 'Error',
+                message: error.body ? error.body.message : error.message,
+                variant: 'error'
+            }));
+        }
     }
-}
-
-
-    @api recordId; // Provided by the page automatically
-    showUpload = false;
 
     handleCheckboxChange(event) {
-        this.showUpload = event.target.checked;
+        const isChecked = event.target.checked;
+        this.showUpload = isChecked;
+        this.receiptAttached = isChecked; // ✅ Important !
     }
 
-@track contactId; // L’ID du contact auquel sera liée la pièce jointe
-
-handleUploadFinished(event) {
-    const uploadedFiles = event.detail.files;
-    if (uploadedFiles.length > 0) {
-        const fileName = uploadedFiles[0].name;
-        this.showToast('Success', `File ${fileName} uploaded successfully.`, 'success');
+    handleUploadFinished(event) {
+        const uploadedFiles = event.detail.files;
+        if (uploadedFiles.length > 0) {
+            const fileName = uploadedFiles[0].name;
+            this.showToast('Success', `File ${fileName} uploaded successfully.`, 'success');
+        }
     }
-}
 
+    showToast(title, message, variant) {
+        this.dispatchEvent(new ShowToastEvent({
+            title,
+            message,
+            variant
+        }));
+    }
 }

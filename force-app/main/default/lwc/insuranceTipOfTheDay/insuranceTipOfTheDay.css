@@ -1,15 +1,100 @@
-.tip-container {
-    background-color: #f4f6f9;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    margin: 1rem;
-    text-align: center;
+.custom-card-container {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
-.tip-text {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #1a1a1a;
-    line-height: 1.6;
+/* Container (card) */
+.custom-tip-container {
+  background: linear-gradient(to bottom right, #ffffff, #f0f6fc);
+  border-radius: 1.25rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  margin: 1.5rem auto;
+  max-width: 38rem;
+  padding: 2rem 2rem;
+  border-left: 6px solid #0070d2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-tip-container:hover {
+  transform: scale(1.015);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Header (title) */
+.custom-tip-heading {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #1a1a1a;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Tip text */
+.custom-tip-text {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.35s ease-out;
+}
+
+/* Progress bar wrapper */
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #dbe3eb;
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Animated fill */
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #0070d2, #00c8ff);
+  border-radius: 999px;
+  transition: width 0.08s linear;
+  box-shadow: 0 0 4px rgba(0, 112, 210, 0.7);
+}
+.custom-tip-container:hover {
+  animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    transform: scale(1.012);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  }
 }

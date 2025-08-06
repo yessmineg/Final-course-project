@@ -1,0 +1,151 @@
+:host {
+  display: block;
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  padding: 3rem 1rem;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1a1a1a;
+}
+
+/* Container */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  background: rgba(255 255 255 / 0.85);
+  border-radius: 1.8rem;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.15);
+  padding: 2.5rem 3rem 3rem;
+  animation: fadeIn 0.9s ease-out forwards;
+  opacity: 0;
+  transform: translateY(40px);
+  user-select: none;
+}
+
+/* Header */
+.header {
+  margin-bottom: 3rem;
+  text-align: center;
+  user-select: text;
+}
+
+.welcome {
+  font-size: 2.6rem;
+  font-weight: 900;
+  margin-bottom: 0.3rem;
+  color: #0a4a86;
+  text-shadow: 0 1px 3px rgba(10,74,134,0.3);
+}
+
+.app-desc {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: #333;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* Grid of dashboard cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.2rem;
+  justify-content: center;
+}
+
+/* Each card */
+.card {
+  background: rgba(255 255 255 / 0.9);
+  border-radius: 1.5rem;
+  padding: 2rem 2.2rem 2.5rem;
+  box-shadow:
+    0 8px 20px rgba(10, 74, 134, 0.12),
+    inset 0 0 15px rgba(10, 74, 134, 0.06);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(.3,.7,.4,1), box-shadow 0.4s ease;
+  outline-offset: 3px;
+  user-select: text;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:focus,
+.card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow:
+    0 18px 38px rgba(10, 74, 134, 0.3),
+    inset 0 0 30px rgba(10, 74, 134, 0.15);
+  z-index: 5;
+}
+
+.card:focus {
+  outline: 3px solid #0a4a86;
+}
+
+/* Title and description */
+.title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: #074772;
+  user-select: text;
+}
+
+.desc {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  color: #3a3a3a;
+  min-height: 5.5rem; /* ensure consistent card height */
+  user-select: text;
+}
+
+/* Open button */
+.btn {
+  align-self: flex-start;
+  background-color: #0a4a86;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.6rem;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+  user-select: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #062f54;
+  transform: scale(1.1);
+  outline: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes swing {
+  0%, 100% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+}

@@ -1,44 +1,85 @@
 <template>
-    <lightning-card title="My Reimbursement Requests" icon-name="standard:record">
+     <div class="custom-card-container">
         <div class="custom-card-body">
-            <template if:true={isLoading}>
-                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
-            </template>
 
-            <template if:true={adjustedCoverageLimit}>
-                <div class="slds-text-heading_small slds-m-bottom_x-small">
-                    <strong>Remaining Coverage Limit:</strong> {formattedAnnualCoverageLimit}
-                </div>
-            </template>
+            <div class="content-container">
+                <!-- Spinner -->
+                <template if:true={isLoading}>
+                    <div class="center-spinner">
+                        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                    </div>
+                </template>
 
-            <template if:true={exclusions}>
-                <div class="slds-text-body_regular slds-m-bottom_small">
-                    <strong>Exclusions:</strong> {exclusions}
-                </div>
-            </template>
+                <!-- Remaining Coverage Limit Card -->
+                <template if:true={adjustedCoverageLimit}>
+                    <div class="info-card shadow-card slds-p-around_medium slds-m-bottom_medium slds-grid slds-align-start">
+                        <lightning-icon
+                            icon-name="utility:money"
+                            size="small"
+                            class="slds-m-right_small text-success"
+                        ></lightning-icon>
+                        <div>
+                            <div class="slds-text-title_caps slds-text-color_weak">Remaining Coverage Limit</div>
+                            <div class="slds-text-heading_medium text-success">{formattedAnnualCoverageLimit}</div>
+                        </div>
+                    </div>
+                </template>
 
-            <template if:true={reimbursements.length}>
-                <lightning-datatable
-                    key-field="Id"
-                    data={reimbursements}
-                    columns={columns}
-                    hide-checkbox-column
-                    class="custom-datatable"
-                ></lightning-datatable>
-            </template>
+                <!-- Exclusions Card -->
+                <template if:true={exclusions}>
+                    <div class="warning-card shadow-card slds-p-around_medium slds-m-bottom_medium slds-grid slds-align-start">
+                        <lightning-icon
+                            icon-name="utility:warning"
+                            size="small"
+                            class="slds-m-right_small text-warning"
+                        ></lightning-icon>
+                        <div>
+                            <div class="slds-text-title_caps slds-text-color_weak">Exclusions</div>
+                            <div class="slds-text-body_regular">{exclusions}</div>
+                        </div>
+                    </div>
+                </template>
 
-            <template if:true={error}>
-                <div class="error-message">
-                    <lightning-icon
-                        icon-name="utility:error"
-                        alternative-text="Error"
-                        size="small"
-                        class="error-icon"
-                    ></lightning-icon>
-                    <span>{error}</span>
-                </div>
-            </template>
+                <!-- Table Section -->
+                <template if:true={reimbursements.length}>
+                    <div class="table-section">
+                        <div class="table-header">
+                            <div>
+                                <h2 class="header-title">💸 Reimbursement Overview</h2>
+                                <p class="header-subtitle">Below are your recent reimbursement requests</p>
+                            </div>
+                            <lightning-button-icon
+                                icon-name="utility:refresh"
+                                alternative-text="Refresh"
+                                title="Refresh"
+                                onclick={handleRefresh}
+                                class="refresh-btn"
+                            ></lightning-button-icon>
+                        </div>
+
+                        <lightning-datatable
+                            key-field="Id"
+                            data={reimbursements}
+                            columns={columns}
+                            hide-checkbox-column
+                            class="custom-datatable"
+                        ></lightning-datatable>
+                    </div>
+                </template>
+
+                <!-- Error -->
+                <template if:true={error}>
+                    <div class="error-message">
+                        <lightning-icon
+                            icon-name="utility:error"
+                            alternative-text="Error"
+                            size="small"
+                            class="error-icon"
+                        ></lightning-icon>
+                        <span>{error}</span>
+                    </div>
+                </template>
+            </div>
         </div>
-    </lightning-card>
+     </div>
 </template>
- 

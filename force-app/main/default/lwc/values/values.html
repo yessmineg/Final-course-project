@@ -1,26 +1,12 @@
 <template>
     <div class="circle-container">
-        <div class="circle-row">
-            <div class="circle">
-                <lightning-icon icon-name="utility:user" size="small" class="circle-icon"></lightning-icon>
-                <p class="circle-value">Responsibility</p> <!-- Responsabilité -->
-            </div>
-            <div class="circle">
-                <lightning-icon icon-name="utility:shield" size="small" class="circle-icon"></lightning-icon>
-                <p class="circle-value">Providence</p> <!-- Prévoyance -->
-            </div>
-            <div class="circle">
-                <lightning-icon icon-name="utility:lock" size="small" class="circle-icon"></lightning-icon>
-                <p class="circle-value">Security</p> <!-- Sécurité -->
-            </div>
-            <div class="circle">
-                <lightning-icon icon-name="utility:transparent" size="small" class="circle-icon"></lightning-icon>
-                <p class="circle-value">Transparency</p> <!-- Transparence -->
-            </div>
-            <div class="circle">
-                <lightning-icon icon-name="utility:puzzle" size="small" class="circle-icon"></lightning-icon>
-                <p class="circle-value">Innovation</p> <!-- Innovation -->
-            </div>
+        <div class="circle-grid">
+            <template for:each={values} for:item="item">
+                <div key={item.id} class="circle" tabindex="0">
+                    <lightning-icon icon-name={item.icon} size="medium" class="circle-icon"></lightning-icon>
+                    <p class="circle-value">{item.label}</p>
+                </div>
+            </template>
         </div>
     </div>
 </template>

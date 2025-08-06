@@ -1,0 +1,33 @@
+<template>
+  <section class="container fade-in">
+    <!-- Separate Header Section -->
+    <header class="header">
+      <h2 class="welcome">📊 Care to see some statistics about your data ?</h2>
+      <p class="app-desc">Access your key dashboards instantly.</p>
+    </header>
+
+    <div class="grid">
+      <template for:each={dashboards} for:item="dash">
+        <div 
+          key={dash.url} 
+          class="card {dash.theme}" 
+          tabindex="0" 
+          role="button" 
+          aria-label={dash.ariaLabel} 
+          data-url={dash.url} 
+          onclick={openDashboard} 
+          onkeydown={openDashboardKey}>
+          <h3 class="title">{dash.label}</h3>
+          <p class="desc">{dash.description}</p>
+          <button 
+            class="btn" 
+            data-url={dash.url} 
+            onclick={openDashboard} 
+            title="Open in new tab">
+            Open ↗
+          </button>
+        </div>
+      </template>
+    </div>
+  </section>
+</template>

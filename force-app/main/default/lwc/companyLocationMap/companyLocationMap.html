@@ -1,0 +1,99 @@
+<template>
+  <!-- Carte de localisation -->
+  <div class="custom-card-container">
+
+<div style="text-align: center;">
+  <div style="font-size: 2.5rem; font-weight: bold; line-height: 1.5; margin-bottom: 0.75rem;">
+    <span>🌍</span>
+    <span style="
+      background: linear-gradient(90deg, #325166, #498ab1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    ">
+      Where to Find Us
+    </span>
+  </div>
+</div>
+
+
+
+    <div class="map-container">
+      <lightning-map
+        map-markers={markers}
+        center={center}
+        zoom-level="15"
+        map-style="roadmap"
+        options={mapOptions}>
+      </lightning-map>
+    </div>
+    <div class="info-text slds-p-around_medium">
+      <div class="info-row">
+        <div style="font-size: 1rem; font-weight: bold; line-height: 1.5; margin-bottom: 0.75rem;">
+  <span>📌</span>
+  <span style="
+    background: linear-gradient(90deg, #325166, #325166);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  ">
+    Adresse :
+  </span>
+</div>
+
+        
+        <div style="font-size: 0.7rem; font-weight: bold; background: linear-gradient(90deg, #000000, #000000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: transparent; line-height: 1.5; margin-bottom: 0.75rem;">
+                        12 Rue de la Réussite, 75004 Paris
+        </div>
+      </div>
+      <div class="info-row">
+       
+        <div style="font-size: 1rem; font-weight: bold; line-height: 1.5; margin-bottom: 0.75rem;">
+  <span>⏰</span>
+  <span style="
+    background: linear-gradient(90deg, #325166, #325166);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  ">
+    Hours of work :
+  </span>
+</div>
+
+        
+        <div style="font-size: 0.7rem; font-weight: bold; background: linear-gradient(90deg, #000000, #000000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: transparent; line-height: 1.5; margin-bottom: 0.75rem;">
+                        Monday - Friday, 9h - 17h30
+        </div>
+      </div>
+      <div class="info-row">
+        <div style="font-size: 1rem; font-weight: bold; line-height: 1.5; margin-bottom: 0.75rem;">
+  <span>📞</span>
+  <span style="
+    background: linear-gradient(90deg, #325166, #325166);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  ">
+    Téléphone :
+  </span>
+</div>
+
+      
+<div style="font-size: 0.7rem; font-weight: bold; background: linear-gradient(90deg, #000000, #000000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: transparent; line-height: 1.5; margin-bottom: 0.75rem;">
+                        +33 1 23 45 67 89
+        </div>
+
+      </div>
+
+      <div class="slds-m-top_medium slds-text-align_center">
+        <a href={googleMapsLink} target="_blank" class="google-button">
+          📍 See on Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,11 +1,10 @@
-import { LightningElement, wire } from 'lwc';
-import { NavigationMixin } from 'lightning/navigation'; // Import NavigationMixin
+import { LightningElement, wire, track } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 import getInsurancePackages from '@salesforce/apex/InsurancePackageController.getInsurancePackages';
 
 export default class InsurancePackages extends NavigationMixin(LightningElement) {
-    packages = [];
+    @track packages = [];
 
-    // Utilisation de la méthode @wire pour récupérer les packages depuis Apex
     @wire(getInsurancePackages)
     wiredPackages({ data, error }) {
         if (data) {
@@ -26,31 +25,36 @@ export default class InsurancePackages extends NavigationMixin(LightningElement)
                 discounts: pkg.Discounts__c,
                 renewalConditions: pkg.Renewal_Conditions__c,
                 type: pkg.type__c,
-                showDetails: false // Ajouter une propriété pour chaque produit
+                showDetails: false,
+                iconClass: 'icon',
+                accordionClass: 'additional-info'
             }));
         } else if (error) {
             console.error('Error fetching packages', error);
         }
     }
 
-    // Fonction pour basculer l'état de l'affichage des détails
     toggleAccordion(event) {
-        const productCode = event.target.dataset.id; // Get the product code from the data-id attribute
-        const packageIndex = this.packages.findIndex(pkg => pkg.productCode === productCode);
-        
-        if (packageIndex !== -1) {
-            this.packages[packageIndex].showDetails = !this.packages[packageIndex].showDetails; // Toggle the showDetails property
-            this.packages = [...this.packages]; // Trigger reactivity by creating a new array reference
+        const productCode = event.currentTarget.dataset.id;
+        const index = this.packages.findIndex(pkg => pkg.productCode === productCode);
+
+        if (index !== -1) {
+            // Toggle showDetails
+            this.packages[index].showDetails = !this.packages[index].showDetails;
+
+            // Update classes
+            this.packages[index].iconClass = this.packages[index].showDetails ? 'icon rotate' : 'icon';
+            this.packages[index].accordionClass = this.packages[index].showDetails ? 'additional-info expanded' : 'additional-info';
+
+            // Trigger reactive update
+            this.packages = [...this.packages];
         }
     }
 
-    // Fonction pour rediriger vers la page des produits
     navigateToProducts() {
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
-            attributes: {
-                url: '/products'  // Change this to the actual URL or Salesforce page reference
-            }
+            attributes: { url: '/products' }
         });
     }
 }

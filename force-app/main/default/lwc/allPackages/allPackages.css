@@ -1,290 +1,526 @@
 /* ===========================
-   General Modal Styles
+   Modal Styles
    =========================== */
-   .slds-backdrop {
-    background-color: rgba(0, 0, 0, 0.6); /* Légèrement plus foncé pour plus de contraste */
+.slds-backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
-/* Modal Container */
 .slds-modal__container {
-    max-width: 40rem;  /* Augmenter la taille pour plus d'espace */
-    padding: 2rem;
-    border-radius: 10px;  /* Coins plus arrondis pour un effet moderne */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 40rem;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: none;
 }
 
-/* Modal Header */
 .slds-modal__header {
-    background-color: #2b4d6c;
-    color: white;
-    font-size: 1.5rem; /* Augmenter la taille de la police */
-    padding: 1.5rem;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 10px 10px 0 0;
+  background-color: #2b4d6c;
+  color: white;
+  font-size: 1.5rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px 10px 0 0;
 }
 
-/* Close Button */
 .slds-modal__close {
-    color: #fff;
-    border: none;
-    background: none;
-    font-size: 1.5rem; /* Agrandir le bouton pour une meilleure visibilité */
-    cursor: pointer;
-    transition: color 0.3s ease;
+  color: #fff;
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 .slds-modal__close:hover {
-    color: #ffcccb;
+  color: #ffcccb;
 }
 
-/* Modal Content */
 .slds-modal__content {
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 0 0 10px 10px; /* Coins arrondis pour le bas */
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 0 0 10px 10px;
 }
 
-/* Modal Footer */
 .slds-modal__footer {
-    background-color: #f9f9f9;
-    padding: 1rem;
-    border-top: 1px solid #ddd;
-    text-align: right;
-    border-radius: 0 0 10px 10px;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-top: 1px solid #ddd;
+  text-align: right;
+  border-radius: 0 0 10px 10px;
 }
 
 /* ===========================
-   Package Card Styling
+   Enhanced Insurance Card
    =========================== */
-.package-card {
-    background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    margin-bottom: 1rem;
+.enhanced-card {
+  border-radius: 14px;
+  padding: 1.75rem;
+  background: linear-gradient(to bottom right, #f8fbff, #ecf3f9);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+  border-left: 6px solid var(--border-color, #cccccc);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.package-card:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    transform: translateY(-5px); /* Légère élévation pour l'effet de survol */
-    background-color: #eef2f7;
+.enhanced-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(50, 81, 102, 0.2);
+}
+
+.package-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 200px;
+  border-radius: 10px;
 }
 
 /* ===========================
-   Text & Typography
+   Enhanced Text Section
    =========================== */
-.slds-text-heading_medium {
-    font-size: 1.5rem;  /* Augmenter la taille des titres pour plus de visibilité */
-    font-weight: 600;
-    margin-bottom: 1rem;
+.enhanced-text-section {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f9fbfd, #eef3f9);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.slds-text-heading_small {
-    font-size: 1.125rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
+.pkg-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a365d;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.premium {
-    color: #0070d2;
-    font-weight: bold;
+.pkg-icon {
+  font-size: 1.6rem;
 }
 
-.slds-text-title {
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 0.75rem;
+.pkg-desc {
+  font-size: 1.05rem;
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.pkg-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.info-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-2px);
+}
+
+.info-icon {
+  font-size: 1.4rem;
+  margin-right: 0.6rem;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #718096;
+  margin-bottom: 0.1rem;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.info-value.premium {
+  background: linear-gradient(to right, #0070d2, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===========================
+   Status Badge
+   =========================== */
+.status-card {
+  justify-content: center;
+  text-align: center;
+  background: #edf2f7;
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-active {
+  background-color: #d4f5e1;
+  color: #228b4d;
+}
+
+.status-pending {
+  background-color: #fff4e5;
+  color: #d49100;
+}
+
+.status-expired {
+  background-color: #fdecea;
+  color: #c62828;
+}
+
+/* ===========================
+   Detail Box
+   =========================== */
+.details-section {
+  background-color: #f4f8fc;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.detail-box {
+  font-size: 0.95rem;
+  color: #2e3a59;
+  margin-bottom: 0.5rem;
 }
 
 /* ===========================
    Buttons
    =========================== */
-.lightning-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    border-radius: 8px;
-    border: none;
-    background-color: #0070d2;
-    color: white;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    margin-left: 12px;
+.lightning-button,
+.brand-button,
+.cancel-button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Button scales slightly and expands on hover */
+.brand-button {
+  background: linear-gradient(to right, #0070d2, #004b87);
+  color: white;
+}
+
 .brand-button:hover {
-    background-color: #2b4d6c;
-    transform: scale(1.1);
-    padding-right: 1.6rem; /* extra room for emoji */
+  background: linear-gradient(to right, #004b87, #002f5a);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Emoji hidden by default: no width */
+.cancel-button {
+  background: linear-gradient(to right, #e0e0e0, #bdbdbd);
+  color: #333;
+}
+
+.cancel-button:hover {
+  background: linear-gradient(to right, #bdbdbd, #9e9e9e);
+  transform: translateY(-1px);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
 .btn-emoji {
-    width: 0;
-    opacity: 0;
-    transform: translateY(-10px) scale(0.8);
-    transition: all 0.4s ease;
-    overflow: hidden;
-    white-space: nowrap;
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
 }
 
-/* Emoji expands on hover */
 .brand-button:hover .btn-emoji {
-    width: auto;
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    margin-left: 0.4rem;
+  transform: translateY(0);
+  opacity: 1;
 }
 
-/* Disabled styling */
-.lightning-button:disabled {
-    background-color: #d8dde6;
-    color: #f4f6f9;
-    cursor: not-allowed;
+.btn-emoji {
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.brand-button:hover .btn-emoji,
+.cancel-button:hover .btn-emoji {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 
 /* ===========================
-   Input Fields
+   Icon Colors
    =========================== */
-.slds-input, .slds-textarea {
-    padding: 0.75rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 5px rgba(0, 75, 135, 0.1);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.slds-input:focus, .slds-textarea:focus {
-    border-color: #004b87;
-    box-shadow: 0 0 5px rgba(0, 75, 135, 0.5);
-}
-
-/* Label Styling */
-.lightning-input label {
-    font-weight: 600;
-    margin-bottom: 0.5rem; /* Ajout de marge sous les labels pour plus d'espace */
-}
+.copper-icon lightning-icon svg { fill: #b87333; }
+.silver-icon lightning-icon svg { fill: #c0c0c0; }
+.gold-icon lightning-icon svg { fill: #ffd700; }
 
 /* ===========================
-   Package Summary Section
+   Package Border Colors
    =========================== */
-.package-summary {
-    background-color: #f1f5f8;
-    padding: 1.5rem;
-    border-radius: 6px;
-    margin-bottom: 1.5rem;
-}
-
-h3.slds-text-heading_small {
-    margin-bottom: 1.5rem;  /* Ajouter de l'espace sous les titres */
-    font-size: 1.25rem;
-    font-weight: 600;
-}
-
-p.slds-text-title {
-    font-size: 1rem;
-    margin-bottom: 0.75rem;
-}
+.copper-border { border-left: 6px solid #b87333; }
+.silver-border { border-left: 6px solid #c0c0c0; }
+.gold-border   { border-left: 6px solid #ffd700; }
+.default-border { border-left: 6px solid #cccccc; }
 
 /* ===========================
-   Form Layout
+   Centered Buttons
    =========================== */
-.slds-grid.slds-wrap {
-    margin-bottom: 1.5rem;
-}
-
-.slds-col.slds-size_1-of-2 {
-    padding: 0.75rem;
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 /* ===========================
-   Progress Tracker
+   Lightning Card Reset
    =========================== */
-.progress-tracker {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-}
-
-.progress-step {
-    width: 30%;
-    text-align: center;
-    font-weight: bold;
-    padding: 0.75rem;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
-
-.progress-step.completed {
-    color: #2e9a5b;
-    background-color: rgba(46, 154, 91, 0.1);
-}
-
-.progress-step.in-progress {
-    color: #0070d2;
-    background-color: rgba(0, 112, 210, 0.1);
-}
-
-.progress-step.not-started {
-    color: #bbb;
-    background-color: rgba(187, 187, 187, 0.1);
+.custom-card-container {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
 }
 
 /* ===========================
-   Responsiveness
+   Modal Summary Card
+   =========================== */
+.package-summary-card {
+  max-width: 500px;
+  margin: 1rem auto;
+  border: 1px solid #d8dde6;
+  border-left: 6px solid #0070d2;
+  border-radius: 6px;
+  padding: 1.5rem 2rem;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Salesforce Sans', Arial, sans-serif;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: #16325c;
+  border-bottom: 2px solid #0070d2;
+  padding-bottom: 0.3rem;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-item.full-width {
+  grid-column: span 2;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #54698d;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.05em;
+}
+
+.value {
+  font-size: 1rem;
+  color: #1b2838;
+  font-weight: 500;
+  word-wrap: break-word;
+}
+
+.value.premium {
+  color: #028a0f;
+  font-weight: 700;
+}
+
+/* ===========================
+   Responsive
    =========================== */
 @media (max-width: 768px) {
-    .slds-modal__container {
-        max-width: 90%;
-        padding: 1.5rem;
-    }
+  .pkg-info-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .progress-tracker {
-        flex-direction: column;
-        align-items: center;
-    }
+  .pkg-title {
+    font-size: 1.4rem;
+    justify-content: center;
+    text-align: center;
+  }
 
-    .progress-step {
-        width: 80%;
-        margin-bottom: 1rem;
-    }
-}
-.copper-icon lightning-icon svg {
-    fill: #b87333;
-}
+  .pkg-desc {
+    text-align: center;
+  }
 
-.silver-icon lightning-icon svg {
-    fill: #C0C0C0;
-}
+  .details-section {
+    padding: 1rem;
+  }
 
-.gold-icon lightning-icon svg {
-    fill: #FFD700;
-}
-.copper-border {
-    border: 2px solid #b87333; /* Copper color */
+  .info-card {
+    justify-content: center;
+  }
+
+  .button-container {
+    flex-direction: column;
+  }
 }
 
-.silver-border {
-    border: 2px solid #c0c0c0; /* Silver color */
+@media (max-width: 480px) {
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-item.full-width {
+    grid-column: auto;
+  }
+}
+.enhanced-details-wrapper {
+  background: linear-gradient(to bottom right, #f8fbff, #eef3f9);
+  padding: 1.5rem;
+  border-radius: 14px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
 }
 
-.gold-border {
-    border: 2px solid #ffd700; /* Gold color */
+.enhanced-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
 }
 
-.default-border {
-    border: 2px solid #cccccc; /* Default gray border */
+.detail-card {
+  display: flex;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  align-items: center;
+  transition: transform 0.3s ease;
 }
 
+.detail-card:hover {
+  transform: translateY(-2px);
+}
 
+.detail-card.full-width {
+  grid-column: span 2;
+}
+
+.card-icon {
+  font-size: 1.4rem;
+  background: #edf2f7;
+  padding: 0.6rem;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-label {
+  font-size: 0.75rem;
+  color: #718096;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.card-value {
+  font-size: 1.05rem;
+  color: #2d3748;
+  font-weight: 600;
+}
+
+/* Responsive full-width cards on small screens */
+@media (max-width: 480px) {
+  .detail-card.full-width {
+    grid-column: span 1;
+  }
+}
+.detail-section {
+  background: linear-gradient(135deg, #ffffff, #f4f8fc);
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 6px 15px rgba(50, 81, 102, 0.08);
+  border: 1px solid #dce3eb;
+  transition: box-shadow 0.3s ease;
+}
+
+.detail-section:hover {
+  box-shadow: 0 8px 25px rgba(50, 81, 102, 0.15);
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #0070d2;
+  padding-bottom: 0.3rem;
+}
+
+/* Garder la grille et cards inchangés */
+.enhanced-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+/* Centrer le bouton (block + margin auto) */
+.big-center-button {
+  display: block;          /* prendre toute la ligne pour centrer avec margin auto */
+  margin: 1.5rem auto;     /* marge verticale + centrage horizontal */
+  
+  /* Taille plus grande */
+  padding: 1rem 2.5rem;   /* plus grand padding */
+  font-size: 1.3rem;      /* texte plus gros */
+  font-weight: 700;       /* texte un peu plus épais */
+  border-radius: 14px;    /* bord arrondi un peu plus marqué */
+  
+  /* Optionnel : élargir un peu la largeur max */
+  max-width: 280px;       /* tu peux ajuster à ta guise */
+  
+  /* Garde le flex interne (emoji + texte) centré */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}

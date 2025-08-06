@@ -1,0 +1,163 @@
+.carousel-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3rem auto;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 2rem;
+}
+
+.carousel-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.gradient-text {
+    background: linear-gradient(to right, #325166, #5dcad1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.carousel-card {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 24px;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.fade-out {
+    animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(1.01); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(1.01); }
+}
+
+.carousel-caption {
+    font-size: 1.35rem;
+    color: #f0f0f0;
+    background: rgba(30, 30, 30, 0.4);
+    padding: 1.2rem 2.5rem;
+    border-radius: 20px;
+    margin-top: 2rem;
+    text-align: center;
+    font-style: italic;
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 1s ease forwards;
+}
+
+/* Animation subtile de défilement du texte */
+.carousel-caption::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -50%;
+    width: 150%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: translateY(-50%) rotate(15deg);
+    animation: shine 2.5s infinite;
+    pointer-events: none;
+}
+
+/* Effet de survol qui soulève la légende */
+.carousel-caption:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    transition: all 0.35s ease;
+}
+
+/* Animation d'entrée */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animation du shine */
+@keyframes shine {
+    0% {
+        left: -50%;
+    }
+    100% {
+        left: 150%;
+    }
+}
+
+
+.progress-bar {
+    width: 80%;
+    height: 6px;
+    background-color: #e0e0e0;
+    border-radius: 3px;
+    margin-top: 1.5rem;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #0070d2;
+    transition: width 0.1s linear;
+}
+
+.dots {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.dot {
+    width: 18px;
+    height: 18px;
+    background-color: #ccc;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.dot:hover {
+    transform: scale(1.2);
+}
+
+.dot.active {
+    background-color: #0070d2;
+    box-shadow: 0 0 6px rgba(0, 112, 210, 0.5);
+}

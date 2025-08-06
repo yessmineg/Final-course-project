@@ -24,15 +24,13 @@ export default class AllPackages extends LightningElement {
     @track postalCode = '';
     @track country = '';
 
-
-
     @wire(getInsurancePackages)
     wiredPackages({ data, error }) {
         if (data) {
             this.packages = data.map(pkg => {
                 let imageUrl;
-                let iconClass = ''; // New variable for the icon class
-    
+                let iconClass = '';
+
                 switch (pkg.Name) {
                     case 'Basic Insurance Package':
                         imageUrl = copper;
@@ -44,10 +42,12 @@ export default class AllPackages extends LightningElement {
                         imageUrl = gold;
                         break;
                     default:
-                        iconClass = 'slds-icon_container slds-icon-standard-shield'; // Add the icon class for packages that don't match
-                        imageUrl = ''; // No image for these packages
+                        iconClass = 'slds-icon_container slds-icon-standard-shield';
+                        imageUrl = '';
                 }
-    
+
+                const showDetails = false; // default
+
                 return {
                     productName: pkg.Name,
                     productCode: pkg.ProductCode,
@@ -66,17 +66,26 @@ export default class AllPackages extends LightningElement {
                     renewalConditions: pkg.Renewal_Conditions__c,
                     status: pkg.Status__c,
                     type: pkg.Type__c,
-                    showDetails: false,
+                    showDetails,
                     imageUrl,
-                    iconClass, // Store the iconClass if needed
-                    statusClass: this.getStatusClass(pkg.Status__c)
+                    iconClass,
+                    statusClass: this.getStatusClass(pkg.Status__c),
+
+                    // Precompute values for template
+                    ariaLabelledBy: `title-${pkg.ProductCode}`,
+                    altText: `Image for ${pkg.Name}`,
+                    ariaControls: `details-${pkg.ProductCode}`,
+                    detailsId: `details-${pkg.ProductCode}`,
+                    toggleTitle: showDetails ? 'Hide details' : 'Show details',
+                    iconName: showDetails ? 'utility:up' : 'utility:down',
+                    alternativeText: showDetails ? 'Collapse details' : 'Expand details',
                 };
             });
         } else if (error) {
             console.error('Error fetching packages', error);
         }
     }
-    
+
     getStatusClass(status) {
         switch (status) {
             case 'Active':
@@ -100,6 +109,11 @@ export default class AllPackages extends LightningElement {
         this.numEmployees = '';
         this.Industry = ''; 
         this.leadSource = '';
+        this.street = '';
+        this.city = '';
+        this.state = '';
+        this.postalCode = '';
+        this.country = '';
     }
     
     closeModal() {
@@ -109,6 +123,7 @@ export default class AllPackages extends LightningElement {
     handleInputChange(event) {
         this[event.target.name] = event.target.value;
     }
+
     handleSubmit() {
         if (!this.selectedPackage || !this.selectedPackage.productCode) {
             this.dispatchEvent(
@@ -129,7 +144,7 @@ export default class AllPackages extends LightningElement {
                 company: this.company,
                 title: this.title,
                 numEmployees: this.numEmployees ? parseInt(this.numEmployees, 10) : null,
-                productCode: this.selectedPackage.productCode,  // Utilisation du productCode
+                productCode: this.selectedPackage.productCode,
                 leadSource: this.leadSource,
                 Industry: this.Industry,
                 street: this.street,
@@ -173,30 +188,34 @@ export default class AllPackages extends LightningElement {
         }
     }
     
-    
     toggleAccordion(event) {
         const productCode = event.target.dataset.id;
         const packageIndex = this.packages.findIndex(pkg => pkg.productCode === productCode);
         if (packageIndex !== -1) {
-            this.packages[packageIndex].showDetails = !this.packages[packageIndex].showDetails;
+            const pkg = this.packages[packageIndex];
+            pkg.showDetails = !pkg.showDetails;
+            pkg.iconName = pkg.showDetails ? 'utility:up' : 'utility:down';
+            pkg.toggleTitle = pkg.showDetails ? 'Hide details' : 'Show details';
+            pkg.alternativeText = pkg.showDetails ? 'Collapse details' : 'Expand details';
+
             this.packages = [...this.packages];
         }
     }
 
     leadSourceOptions = [
-        { label: 'Phone Inquiry', value: 'Phone Inquiry' },
         { label: 'Partner Referral', value: 'Partner Referral' },
         { label: 'Web', value: 'Web' },
         { label: 'Purchased List', value: 'Purchased List' },
         { label: 'Other', value: 'Other' },
     ];
+
     IndustryOptions = [
-        { label: 'Agriculture ', value: 'Agriculture ' },
-        { label: 'Apparel ', value: 'Apparel ' },
-        { label: 'Banking ', value: 'Banking ' },
-        { label: 'Biotechnology ', value: 'Biotechnology ' },
-        { label: 'Chemicals ', value: 'Chemicals ' },
+        { label: 'Agriculture', value: 'Agriculture' },
+        { label: 'Apparel', value: 'Apparel' },
+        { label: 'Banking', value: 'Banking' },
+        { label: 'Biotechnology', value: 'Biotechnology' },
+        { label: 'Chemicals', value: 'Chemicals' },
         { label: 'Communications', value: 'Communications' },
-        { label: 'Construction ', value: 'Construction ' }
+        { label: 'Construction', value: 'Construction' }
     ];
 }

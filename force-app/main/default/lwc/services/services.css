@@ -1,53 +1,101 @@
-.slds-card {
-    background-color: #f3f6f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.services-container {
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, #f4f9fd, #eaf3fa);
+    /* min-height: 100vh;  <-- REMOVE or comment out */
+    font-family: 'Segoe UI', sans-serif;
 }
 
-.slds-list_dotted {
-    padding-left: 0;
-    list-style-type: none;
+
+.services-section {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.slds-item {
-    margin-bottom: 2rem;
+.services-header {
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
-.service-item {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+.services-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #10273b;
+    margin: 0.5rem 0;
 }
 
-.service-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.services-subtitle {
+    font-size: 1.2rem;
+    color: #555;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
-.service-title {
-    font-size: 1.5rem;
-    color: #325166;
-    font-weight: bold;
-    margin-bottom: 10px;
+/* Grid Layout */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+/* Card Styles */
+.service-card {
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    backdrop-filter: blur(8px);
+    padding: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(200, 220, 255, 0.3);
+    text-align: center;
+}
+
+.service-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 8px 30px rgba(0, 112, 210, 0.2);
+    background: rgba(255, 255, 255, 0.85);
+}
+
+/* Icon + Title */
+.icon-wrapper {
+    margin-bottom: 1rem;
+}
+
+.service-icon {
+    --slds-c-icon-color-foreground-default: #325166;
+    --slds-c-icon-color-background: #e3f0ff;
+    border-radius: 50%;
+    padding: 0.3rem;
+}
+
+/* Text */
+.service-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    color: #10273b;
 }
 
 .service-description {
-    font-size: 1.2rem;
-    color: #555;
-    line-height: 1.5;
-    transition: opacity 0.3s ease-in-out;
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
 }
 
-.service-item:hover .service-description {
-    opacity: 0.8;
-}
+/* Responsive tweaks */
+@media screen and (max-width: 500px) {
+    .services-title {
+        font-size: 2rem;
+    }
 
-.slds-text-heading_medium {
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-align: center;
-    color: #333;
-}
+    .services-subtitle {
+        font-size: 1rem;
+    }
 
+    .service-name {
+        font-size: 1.2rem;
+    }
+
+    .service-description {
+        font-size: 0.95rem;
+    }
+}

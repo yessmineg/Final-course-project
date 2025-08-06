@@ -16,6 +16,18 @@
       font-weight: 700;
     }
 
+    /* ===========================
+   Remove Lightning Card Styling
+   =========================== */
+.custom-card-container {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+
     .faq-item {
       margin-bottom: 30px;
       padding-bottom: 20px;

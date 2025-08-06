@@ -1,24 +1,23 @@
 <template>
-    <lightning-card>
-        <div class="slds-p-around_medium">
-            <!-- Titre avec style personnalisé -->
-            <div style="font-family: Arial, sans-serif; line-height: 1.6; background-color: #ffff; padding: 20px;">
-                <h2 style="color: #10273b; font-size: 2rem; font-weight: bold; margin-bottom: 30px;">
-                    <lightning-icon icon-name="standard:service_appointment" size="small" style="vertical-align: middle; margin-right: 10px;"></lightning-icon>
-                    Our services
-                </h2>
-            </div>
+  <div class="services-container">
+    <section class="services-section">
+      <header class="services-header">
+        <lightning-icon icon-name="standard:service_appointment" size="medium" class="header-icon"></lightning-icon>
+        <h2 class="services-title">Our Services</h2>
+        <p class="services-subtitle">Explore the plans tailored to protect what matters most.</p>
+      </header>
 
-            <ul class="slds-list_dotted">
-                <template for:each={services} for:item="service">
-                    <li key={service.id} class="slds-item">
-                        <div class="service-item" onmouseover={handleMouseOver} onmouseout={handleMouseOut}>
-                            <h3 class="service-title">{service.name}</h3>
-                            <p class="service-description">{service.description}</p>
-                        </div>
-                    </li>
-                </template>
-            </ul>
-        </div>
-    </lightning-card>
+      <div class="services-grid">
+        <template for:each={services} for:item="service">
+          <div key={service.id} class="service-card" onmouseover={handleMouseOver} onmouseout={handleMouseOut}>
+            <div class="icon-wrapper">
+              <lightning-icon icon-name={service.icon} alternative-text={service.name} size="small" class="service-icon"></lightning-icon>
+            </div>
+            <h3 class="service-name">{service.name}</h3>
+            <p class="service-description">{service.description}</p>
+          </div>
+        </template>
+      </div>
+    </section>
+  </div>
 </template>

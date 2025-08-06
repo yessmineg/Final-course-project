@@ -2,23 +2,95 @@ import { LightningElement } from 'lwc';
 
 export default class InsuranceTipOfTheDay extends LightningElement {
     tips = [
-        "📌 Vérifiez toujours que votre contrat couvre les soins à l’étranger.",
-        "🩺 Gardez une copie numérique de vos factures médicales.",
-        "📅 Déclarez vos réclamations dans les délais pour éviter tout refus.",
-        "🔐 Protégez vos données médicales : ne les partagez que sur des canaux sécurisés.",
-        "🧾 Conservez vos justificatifs pendant au moins 2 ans.",
-        "📍 Vérifiez si vous êtes éligible à une surcomplémentaire santé.",
-        "🔍 Lisez bien les exclusions de garantie dans votre contrat.",
-        "💬 En cas de doute, contactez votre conseiller avant d'engager des frais.",
-        "⚖️ Certaines garanties peuvent être transférées à vos ayants droit.",
-        "📱 Utilisez votre espace client pour suivre vos remboursements en temps réel."
+        "📌 Always check if your policy covers international medical care.",
+        "🩺 Keep a digital copy of your medical receipts.",
+        "📅 Submit your claims within the deadline to avoid rejection.",
+        "🔐 Protect your medical data – share it only via secure channels.",
+        "🧾 Keep your supporting documents for at least 2 years.",
+        "📍 Check if you're eligible for supplemental health coverage.",
+        "🔍 Read the exclusions in your contract carefully.",
+        "💬 If unsure, contact your advisor before incurring any costs.",
+        "⚖️ Some benefits may be transferred to your dependents.",
+        "📱 Use your client portal to track your reimbursements in real time."
     ];
 
-    currentTip;
+    currentIndex = 0;
+    rotationInterval;
+    progressInterval;
+    progressValue = 0;
+    progressStep = 1.666; // 100 / 60 steps = 6 seconds
+    intervalMs = 100; // progress updates every 100ms
+    tipChangeMs = 6000; // tip changes every 6 seconds
+
+    get currentTip() {
+        return this.tips[this.currentIndex];
+    }
 
     connectedCallback() {
-        const today = new Date();
-        const index = today.getDate() % this.tips.length;
-        this.currentTip = this.tips[index];
+        this.startRotation();
+        this.startProgress();
+    }
+
+    disconnectedCallback() {
+        this.stopRotation();
+        this.stopProgress();
+    }
+
+    startRotation() {
+        if (this.rotationInterval) return;
+
+        this.rotationInterval = setInterval(() => {
+            this.currentIndex = (this.currentIndex + 1) % this.tips.length;
+            this.animateTip();
+            this.resetProgress();
+        }, this.tipChangeMs);
+    }
+
+    stopRotation() {
+        clearInterval(this.rotationInterval);
+        this.rotationInterval = null;
+    }
+
+    startProgress() {
+        this.progressValue = 0;
+        this.progressInterval = setInterval(() => {
+            this.progressValue += this.progressStep;
+            const bar = this.template.querySelector('.progress-bar-fill');
+            if (bar) {
+                bar.style.width = `${Math.min(this.progressValue, 100)}%`;
+            }
+        }, this.intervalMs);
+    }
+
+    stopProgress() {
+        clearInterval(this.progressInterval);
+        this.progressInterval = null;
+    }
+
+    resetProgress() {
+        this.progressValue = 0;
+        const bar = this.template.querySelector('.progress-bar-fill');
+        if (bar) {
+            bar.style.width = `0%`;
+        }
+    }
+
+    animateTip() {
+        const tipElement = this.template.querySelector('.tip-text');
+        if (tipElement) {
+            tipElement.classList.remove('fade-in');
+            void tipElement.offsetWidth;
+            tipElement.classList.add('fade-in');
+        }
+    }
+
+    handleMouseEnter() {
+        this.stopRotation();
+        this.stopProgress();
+    }
+
+    handleMouseLeave() {
+        this.startRotation();
+        this.startProgress();
     }
 }
