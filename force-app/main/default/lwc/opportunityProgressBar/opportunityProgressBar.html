@@ -135,4 +135,25 @@
         </section>
         <div></div>
     </template>
+
+<!-- Closed Won -->
+<template if:true={isClosedWonStage}>
+    <div class="closed-won-card">
+        <h3>🎉 Congratulations!</h3>
+        <p>You are now insured.</p>
+        <p>Please check your email for a survey to provide your feedback.</p>
+    </div>
+</template>
+
+<!-- Closed Lost -->
+<template if:true={isClosedLostStage}>
+    <div class="closed-lost-card">
+        <h3>😞 Opportunity Lost</h3>
+        <p>We're sorry this opportunity did not close successfully.</p>
+        <p>Please contact your account manager for next steps or assistance.</p>
+    </div>
+</template>
+
+
+
 </template>

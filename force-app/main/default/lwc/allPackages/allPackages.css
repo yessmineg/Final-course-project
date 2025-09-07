@@ -9,7 +9,7 @@
   max-width: 40rem;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: none;
+  box-shadow: black;
 }
 
 .slds-modal__header {
@@ -302,7 +302,7 @@
 .custom-card-container {
   background: none;
   border: none;
-  box-shadow: none;
+  box-shadow: black;
   padding: 0;
   margin: 0;
 }

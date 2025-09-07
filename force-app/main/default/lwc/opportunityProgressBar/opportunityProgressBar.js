@@ -1,7 +1,6 @@
 import { LightningElement, wire, api } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
-
 import getUserOpportunities from '@salesforce/apex/OpportunityController.getOpportunity';
 import updateStageToNegotiation from '@salesforce/apex/OpportunityController.updateStageToNegotiation';
 import updateStageToClosedLost from '@salesforce/apex/OpportunityController.updateStageToClosedLost';
@@ -156,5 +155,14 @@ export default class OpportunityProgressPath extends LightningElement {
     get isNegotiationStage() {
     return this.opportunity?.StageName === 'Negotiation/Review';
 }
+
+get isClosedWonStage() {
+    return this.opportunity?.StageName === 'Closed Won';
+}
+
+get isClosedLostStage() {
+    return this.opportunity?.StageName === 'Closed Lost';
+}
+
 
 }
